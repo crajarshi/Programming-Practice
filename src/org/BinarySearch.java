@@ -1,4 +1,4 @@
-package org.Raj.java;
+package org;
 
 /**
  * Created by Raj on 7/13/17.
