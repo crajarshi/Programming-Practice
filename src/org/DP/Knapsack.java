@@ -26,6 +26,9 @@ public class Knapsack {
         int wt[] = {4, 2, 3, 5, 5, 6, 9, 7, 8, 10};
         int r = k.bottomUpDP(val, wt, 30);
         System.out.println(r);
+
+        int coins[] = {1,5,10,25};
+//        int result = k.bottomUpDP(val,coins,)
     }
 
 
