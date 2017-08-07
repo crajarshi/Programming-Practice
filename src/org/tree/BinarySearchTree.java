@@ -86,6 +86,27 @@ class BinarySearchTree {
         return Math.max(findHeightRec(root.left) ,findHeightRec(root.right)) + 1;
     }
 
+
+    void treeTraversalCall() {
+        treeTraversal(root);
+    }
+
+    void treeTraversal(Node root) {
+        if (root != null) {
+            // Preorder: Processes the root before the traversals of left and right
+            // children.
+            System.out.println("Preorder: " + root.key);
+            treeTraversal(root.left);
+            // Inorder: Processes the root after the traversal of left child and
+            // before the traversal of right child.
+            System.out.println("Inorder: " + root.key);
+            treeTraversal(root.right);
+            // Postorder: Processes the root after the traversals of left and right
+            // children.
+            System.out.println("Postorder: " + root.key);
+        }
+    }
+
     // Driver Program to test above functions
     public static void main(String[] args) {
         BinarySearchTree tree = new BinarySearchTree();
@@ -105,8 +126,9 @@ class BinarySearchTree {
         tree.insert(80);
 
         // print inorder traversal of the BST
-        tree.inorder();
-        tree.findMin();
-        tree.findHeight();
+//        tree.inorder();
+//        tree.findMin();
+//        tree.findHeight();
+        tree.treeTraversalCall();
     }
 }
