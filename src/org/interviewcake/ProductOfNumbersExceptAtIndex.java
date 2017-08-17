@@ -6,7 +6,6 @@ package org.interviewcake;
 public class ProductOfNumbersExceptAtIndex {
 
 
-
     public static int[] getProductsOfAllIntsExceptAtIndex(int[] intArray) {
 
         if (intArray.length < 2) {
@@ -38,12 +37,37 @@ public class ProductOfNumbersExceptAtIndex {
         return productsOfAllIntsExceptAtIndex;
     }
 
-    public static void main(String[] args) {
-        int arr [] = {2,4,10};
-        int res [] = getProductsOfAllIntsExceptAtIndex(arr);
-        for (int i =0; i < res.length; i++) {
+    public static int[] getProductsOfAllIntsExceptAtIndexChiku(int[] intArray) {
+        int productSoFar = 1;
+        int[] productsOfAllIntsExceptAtIndex = new int[intArray.length];
+        boolean flagZero = false;
+        for (int i = 0; i < intArray.length; i++) {
+            if (intArray[i] != 0) {
+                if (flagZero) {
+                    productSoFar = 0;
+                } else
+                    productSoFar *= intArray[i];
+            } else
+                flagZero = true;
+        }
+        for (int i = 0; i < intArray.length; i++) {
+            if (intArray[i] != 0) {
+                productsOfAllIntsExceptAtIndex[i] = productSoFar / intArray[i];
+            } else
+                productsOfAllIntsExceptAtIndex[i] = productSoFar;
+        }
+        return productsOfAllIntsExceptAtIndex;
+    }
 
-            System.out.println("Product of element "+ i +  " is " + " : " + res[i]);
+    public static void main(String[] args) {
+//        int arr [] = {2,4,10};
+//        int arr[] = {2, 4, 0, 10, 0};
+        int arr[] = {2, 4, 10, 0};
+//        int res [] = getProductsOfAllIntsExceptAtIndex(arr);
+        int res[] = getProductsOfAllIntsExceptAtIndexChiku(arr);
+        for (int i = 0; i < res.length; i++) {
+
+            System.out.println("Product of element " + i + " is " + " : " + res[i]);
         }
     }
 }
