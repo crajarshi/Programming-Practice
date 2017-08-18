@@ -12,7 +12,7 @@ public class StringtoInt {
     }
 
     public static void main(String[] args) {
-        System.out.println(stringToInt("12356"));
+//        System.out.println(stringToInt("12356"));
         System.out.println(stringToInt("Raj"));
     }
 }
