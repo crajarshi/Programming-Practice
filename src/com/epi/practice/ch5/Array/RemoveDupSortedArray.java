@@ -1,6 +1,7 @@
 package com.epi.practice.ch5.Array;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -8,10 +9,10 @@ import java.util.List;
  */
 public class RemoveDupSortedArray {
 
-    public static int deleteDup(List<Integer> A) {
-        if (A.isEmpty()) {
-            return 0;
-        }
+    public static List<Integer> deleteDup(List<Integer> A) {
+//        if (A.isEmpty()) {
+//            return 0;
+//        }
 
         int writeIndex = 1;
 
@@ -20,7 +21,7 @@ public class RemoveDupSortedArray {
                 A.set(writeIndex++, A.get(i));
             }
         }
-        return writeIndex;
+        return A;
     }
 
     public static void main(String[] args) {
@@ -32,6 +33,8 @@ public class RemoveDupSortedArray {
         lst.add(4);
         lst.add(4);
         lst.add(5);
-        System.out.println(deleteDup(lst));
+        List<Integer> arr = Arrays.asList(1,2,3,4,4,5,6,6,6,7,7);
+
+        System.out.println(deleteDup(arr));
     }
 }
