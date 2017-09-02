@@ -2,7 +2,6 @@ package org.leetcode;
 
 import org.epi.binarytree.BinaryTreeNode;
 
-import javax.swing.tree.TreeNode;
 import java.util.ArrayList;
 import java.util.List;
 
