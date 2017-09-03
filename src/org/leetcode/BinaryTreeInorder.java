@@ -4,6 +4,7 @@ import org.epi.binarytree.BinaryTreeNode;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Stack;
 
 /**
  * Created by Raj on 9/2/17.
@@ -32,6 +33,22 @@ public class BinaryTreeInorder {
         return res;
     }
 
+    public static List < Integer > inorderTraversal(BinaryTreeNode<Integer> root) {
+        List < Integer > res = new ArrayList < > ();
+        Stack < BinaryTreeNode<Integer> > stack = new Stack< >();
+        BinaryTreeNode<Integer> curr = root;
+        while (curr != null || !stack.isEmpty()) {
+            while (curr != null) {
+                stack.push(curr);
+                curr = curr.left;
+            }
+            curr = stack.pop();
+            res.add(curr.data);
+            curr = curr.right;
+        }
+        return res;
+    }
+
     public static void main(String[] args) {
         /* Let us create following Tree
               3
@@ -39,6 +56,15 @@ public class BinaryTreeInorder {
           4      12
          /  \    /  \
        1    40  51   70 */
+        BinaryTreeNode<Integer> tree = createBinaryTree();
+
+        System.out.println(inorderMorrisTraversal(tree));
+        BinaryTreeNode<Integer> tree1 = createBinaryTree();
+
+        System.out.println(inorderTraversal(tree1));
+    }
+
+    private static BinaryTreeNode<Integer> createBinaryTree() {
         BinaryTreeNode<Integer> tree = new BinaryTreeNode<>();
         tree.data = 3;
         tree.left = new BinaryTreeNode<Integer>();
@@ -53,7 +79,6 @@ public class BinaryTreeInorder {
         tree.right.left.data = 51;
         tree.right.right = new BinaryTreeNode<Integer>();
         tree.right.right.data = 70;
-
-        System.out.println(inorderMorrisTraversal(tree));
+        return tree;
     }
 }
