@@ -8,7 +8,7 @@ import static java.lang.Math.min;
 /**
  * Created by Raj on 10/8/17.
  */
-public class lengthOfLongestSubstring {
+public class PracticeWorkSheet {
     /**
      * Finding length of the longest Substring
      *
