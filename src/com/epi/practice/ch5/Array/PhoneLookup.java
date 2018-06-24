@@ -1,9 +1,13 @@
 package com.epi.practice.ch5.Array;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class PhoneLookup {
+
+    private static final String[] MAPPING = {"0", "1", "ABC", "DEF", "GHI", "JKL", "MNO", "PQRS", "TUV", "WXYZ"};
 
     public static List<String> phoneMnemonic(String phoneNumber){
         char [] partialMnemonic = new char[phoneNumber.length()];
@@ -12,8 +16,6 @@ public class PhoneLookup {
         phoneMnenmonicHelper(phoneNumber,0,partialMnemonic,mnemonics);
         return mnemonics;
     }
-
-    private static final String [] MAPPING = {"0","1","ABC","DEF","GHI","JKL","MNO","PQRS","TUV","WXYZ"};
 
     private static void phoneMnenmonicHelper(String phoneNumber, int digit, char[] partialMnemonic,
                                              List<String> mnemonics){
@@ -30,7 +32,20 @@ public class PhoneLookup {
         }
     }
 
+    public static boolean wordPattern(String pattern, String str) {
+        String[] words = str.split(" ");
+        if (words.length != pattern.length())
+            return false;
+        Map index = new HashMap();
+        for (Integer i = 0; i < words.length; ++i)
+            if (index.put(pattern.charAt(i), i) != index.put(words[i], i))
+                return false;
+        return true;
+    }
+
     public static void main(String[] args) {
-        System.out.println(phoneMnemonic("2276696"));
+
+//        System.out.println(phoneMnemonic("2276696"));
+        System.out.println(wordPattern("abba", "dog cat cat dog"));
     }
 }

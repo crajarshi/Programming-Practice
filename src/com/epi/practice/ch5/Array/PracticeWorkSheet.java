@@ -2,265 +2,225 @@ package com.epi.practice.ch5.Array;
 
 import java.util.*;
 
-import static java.lang.Math.max;
-import static java.lang.Math.min;
-
 /**
- * Created by Raj on 10/8/17.
+ * Created by Raj on 6/3/18.
  */
-public class PracticeWorkSheet {
-    /**
-     * Finding length of the longest Substring
-     *
-     * @param s
-     * @return
-     */
-    public static int lengthOfLongestSubstring(String s) {
-        int n = s.length(), ans = 0;
-        Map<Character, Integer> map = new HashMap<>(); // current index of character
-        // try to extend the range [i, j]
-        for (int j = 0, i = 0; j < n; j++) {
-            if (map.containsKey(s.charAt(j))) {
-                i = max(map.get(s.charAt(j)), i);
+public class PracticeWorksheet {
+
+    public static int lengthLongestPath(String input) {
+        Deque<Integer> stack = new ArrayDeque<>();
+        String[] arr = input.split("\n");
+        int maxLen = 0;
+        stack.push(0); //dummy null length
+        for (String s : arr) {
+            /*
+            numOfTabs is the number of "\t", numOfTabs = 0
+            when "\t" is not found, because s.lastIndexOf("\t") returns -1.
+            So normally, the first parent "dir" have numOfTabs 0.
+            */
+            int numOfTabs = s.lastIndexOf("\t") + 1;
+            /* Level is defined as numOfTabs + 1.
+            For example, in "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext",
+            dir is level 1, subdir1 and subdir2 are level 2, file.ext is level3
+            */
+            int level = numOfTabs + 1;
+            /*
+            The following part of code is the case that we want to consider when there are
+            several subdirectories in a same level. We want to remove
+            the path length of the directory or the file of same level
+            that we added during previous step, and calculate
+            the path length of current directory or file that we are currently looking at.
+            */
+            while (level < stack.size()) stack.poll();
+            int curLen = stack.peek() + s.length() - numOfTabs + 1;
+            stack.push(curLen);
+            if (s.contains("."))
+                maxLen = Math.max(maxLen, curLen - 1); //Only update the maxLen when a file is discovered,
+            // And remove the "/" at the end of file
+        }
+        return maxLen;
+    }
+
+    public static String nextClosestTime(String time) {
+        /**
+         Simulate the clock going forward by one minute. Each time it moves forward, if all the digits are allowed, then return the current time.
+         The natural way to represent the time is as an integer t in the range 0 <= t < 24 * 60. Then the hours are t / 60, the minutes are t % 60, and each digit of the hours and minutes can be found by hours / 10, hours % 10 etc.
+         */
+        int cur = 60 * Integer.parseInt(time.substring(0, 2));
+        cur += Integer.parseInt(time.substring(3));
+        Set<Integer> allowed = new HashSet();
+        for (char c : time.toCharArray())
+            if (c != ':') {
+                allowed.add(c - '0');
             }
-            ans = max(ans, j - i + 1);
-            map.put(s.charAt(j), j + 1);
+
+        while (true) {
+            cur = (cur + 1) % (24 * 60);
+            int[] digits = new int[]{cur / 60 / 10, cur / 60 % 10, cur % 60 / 10, cur % 60 % 10};
+            search:
+            {
+                for (int d : digits) if (!allowed.contains(d)) break search;
+                return String.format("%02d:%02d", cur / 60, cur % 60);
+            }
+        }
+    }
+
+    public static int longestSubArray(List<Integer> A) {
+        Map<Integer, Integer> hm = new HashMap<>();
+        int startIdx = 0, result = 0;
+        for (int i = 0; i < A.size(); ++i) {
+            Integer dupIdx = hm.put(A.get(i), i);
+            if (dupIdx != null) {
+                if (dupIdx >= startIdx) {
+                    result = Math.max(result, i - startIdx);
+                    startIdx = dupIdx + 1;
+                }
+            }
+        }
+        return Math.max(result, A.size() - startIdx);
+    }
+
+    public static int checkHm(List<String> A) {
+        Map<String, Integer> hm = new LinkedHashMap<>();
+        int i = 0;
+        for (String str : A) {
+            hm.put(str, i++);
+        }
+        return hm.size();
+    }
+
+
+    public static void printKSmallest(int[] nums, int k) {
+        if (k > nums.length) {
+            return;
+        }
+        PriorityQueue<Integer> heap = new PriorityQueue<>(k, new Comparator<Integer>() {
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                return Integer.compare(o2, o1);
+            }
+        });
+
+        for (int i = 0; i < nums.length; i++) {
+            if (i < k) {
+                heap.add(nums[i]);
+            } else if (nums[i] < heap.peek()) {
+                heap.remove();
+                heap.add(nums[i]);
+            }
+        }
+        System.out.println(heap.peek());
+    }
+
+
+    public static void rotate(int[] nums, int k) {
+        k %= nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+        for (int num : nums)
+            System.out.println(num);
+    }
+
+    public static void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[start];
+            nums[start++] = nums[end];
+            nums[end--] = temp;
+        }
+    }
+
+    public static boolean isValid(String s) {
+        int count = 0;
+
+        for (int i = 0; i < s.length(); i++) {
+            char c = s.charAt(i);
+            if (c == '(') count++;
+            if (c == ')' && count-- == 0) return false;
+        }
+
+        return count == 0;
+    }
+
+    public static String addBinary(String a, String b) {
+        StringBuilder sb = new StringBuilder();
+        int i = a.length() - 1, j = b.length() - 1, carry = 0;
+        while (i >= 0 || j >= 0) {
+            int sum = carry;
+            if (j >= 0) sum += b.charAt(j--) - '0';
+            if (i >= 0) sum += a.charAt(i--) - '0';
+            sb.append(sum % 10);
+            carry = sum / 10;
+        }
+        if (carry != 0) sb.append(carry);
+        return sb.reverse().toString();
+    }
+
+    public static String multiplyBinary(String a, String b) {
+        StringBuilder sb = new StringBuilder();
+        int i = a.length() - 1, j = b.length() - 1, carry = 1;
+        while (i >= 0 || j >= 0) {
+            int sum = carry;
+            if (j >= 0) sum *= b.charAt(j--) - '0';
+            if (i >= 0) sum *= a.charAt(i--) - '0';
+            sb.append(sum % 10);
+            carry = sum / 10;
+        }
+        if (carry != 0) sb.append(carry);
+        return sb.reverse().toString();
+    }
+
+
+    public static List<String> letterCombinations(String digits) {
+        LinkedList<String> ans = new LinkedList<String>();
+        if (digits.isEmpty()) return ans;
+        String[] mapping = new String[]{"0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"};
+        ans.add("");
+        for (int i = 0; i < digits.length(); i++) {
+            int x = Character.getNumericValue(digits.charAt(i));
+            while (ans.peek().length() == i) {
+                String t = ans.remove();
+                for (char s : mapping[x].toCharArray())
+                    ans.add(t + s);
+            }
         }
         return ans;
     }
 
-    /**
-     * House Robbery/ Finding maximum sum in an array of Integers without selecting adjacent elements.
-     *
-     * @param nums
-     * @return
-     */
-    public static int rob(int[] nums) {
-        int prevMax = 0;
-        int currMax = 0;
-        int temp = 0;
-        for (int x : nums) {
-            temp = currMax;
-            currMax = max(prevMax + x, currMax);
-            prevMax = temp;
+    public static int maxSubArrayLen(int[] nums, int k) {
+        int sum = 0, max = 0;
+        HashMap<Integer, Integer> map = new HashMap<Integer, Integer>();
+        for (int i = 0; i < nums.length; i++) {
+            sum = sum + nums[i];
+            if (sum == k) max = i + 1;
+            else if (map.containsKey(sum - k)) max = Math.max(max, i - map.get(sum - k));
+            if (!map.containsKey(sum)) map.put(sum, i);
         }
-        return currMax;
+        return max;
     }
 
-    /**
-     * Finding top k most frequent elements in an Array
-     *
-     * @param nums
-     * @param k
-     * @return
-     */
-    public static List<Integer> topKFrequent(int[] nums, int k) {
 
-        List<Integer>[] bucket = new List[nums.length + 1];
-        Map<Integer, Integer> frequencyMap = new HashMap<Integer, Integer>();
-
-        for (int n : nums) {
-            frequencyMap.put(n, frequencyMap.getOrDefault(n, 0) + 1);
-        }
-
-        for (int key : frequencyMap.keySet()) {
-            int frequency = frequencyMap.get(key);
-            if (bucket[frequency] == null) {
-                bucket[frequency] = new ArrayList<>();
-            }
-            bucket[frequency].add(key);
-        }
-
-        List<Integer> res = new ArrayList<>();
-
-        for (int pos = bucket.length - 1; pos >= 0 && res.size() < k; pos--) {
-            if (bucket[pos] != null) {
-                res.addAll(bucket[pos]);
-            }
-        }
-        return res;
-    }
-
-    /**
-     * Check if an integer is a power of the given radix value.
-     *
-     * @param n
-     * @param radix
-     * @return
-     */
-    public static boolean isPowerOfRadix(int n, int radix) {
-        return Integer.toString(n, radix).matches("10*");
-    }
-
-    /**
-     * INORDER ITERATIVE.
-     *
-     * @param root
-     * @return
-     */
-    public static List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
-        Deque<TreeNode> stack = new ArrayDeque<>();
-        TreeNode p = root;
-        while (!stack.isEmpty() || p != null) {
-            if (p != null) {
-                stack.push(p);
-                p = p.left;
-            } else {
-                TreeNode node = stack.pop();
-                result.add(node.val);  // Add after all left children
-                p = node.right;
-            }
-        }
-        return result;
-    }
-
-    /**
-     * POSTORDER ITERATIVE
-     *
-     * @param root
-     * @return
-     */
-    public static List<Integer> postorderTraversal(TreeNode root) {
-        LinkedList<Integer> result = new LinkedList<>();
-        Deque<TreeNode> stack = new ArrayDeque<>();
-        TreeNode p = root;
-        while (!stack.isEmpty() || p != null) {
-            if (p != null) {
-                stack.push(p);
-                result.addFirst(p.val);  // Reverse the process of preorder
-                p = p.right;             // Reverse the process of preorder
-            } else {
-                TreeNode node = stack.pop();
-                p = node.left;           // Reverse the process of preorder
-            }
-        }
-        return result;
-    }
-
-    /**
-     * PREORDER ITERATIVE
-     *
-     * @param root
-     * @return
-     */
-    public static List<Integer> preorderTraversal(TreeNode root) {
-        List<Integer> result = new ArrayList<>();
-        Deque<TreeNode> stack = new ArrayDeque<>();
-        TreeNode p = root;
-        while (!stack.isEmpty() || p != null) {
-            if (p != null) {
-                stack.push(p);
-                result.add(p.val);  // Add before going to children
-                p = p.left;
-            } else {
-                TreeNode node = stack.pop();
-                p = node.right;
-            }
-        }
-        return result;
-    }
-
-    public static int maxProduct(int[] nums) {
-        // store the result that is the max we have found so far
-        int r = nums[0];
-
-        // imax/imin stores the max/min product of
-        // subarray that ends with the current number nums[i]
-        for (int i = 1, imax = r, imin = r; i < nums.length; i++) {
-            // multiplied by a negative makes big number smaller, small number bigger
-            // so we redefine the extremums by swapping them
-            if (nums[i] < 0)
-                swap(imax, imin);
-
-            // max/min product for the current number is either the current number itself
-            // or the max/min by the previous number times the current one
-            imax = max(nums[i], imax * nums[i]);
-            imin = min(nums[i], imin * nums[i]);
-
-            // the newly computed max value is a candidate for our global result
-            r = max(r, imax);
-
-        }
-        return r;
-    }
-
-    public static void swap(int i, int j) {
-        int temp = i;
-        j = i;
-        i = temp;
-    }
-
-    /**
-     * This Program calculates longest nonDecreasing Subsequence
-     *
-     * @param a
-     * @return
-     */
-    public static int longestNonDecreasingSubSequence(List<Integer> a) {
-
-        Integer[] maxLength = new Integer[(a.size())];
-        Integer[] maxArr = new Integer[(a.size())];
-        Map<Integer, List<Integer>> map = new HashMap<>(a.size());
-        Arrays.fill(maxLength, 1);
-        for (int i = 1; i < a.size(); ++i) {
-            for (int j = 0; j < i; ++j) {
-                if (a.get(i) >= a.get(j))
-                    maxLength[i] = Math.max(maxLength[i], maxLength[j] + 1);
-            }
-        }
-        System.out.println();
-        return Collections.max(Arrays.asList(maxLength));
-    }
 
     public static void main(String[] args) {
+//        System.out.println(lengthLongestPath("dir\n\tsubdir1\n\t\tfile1.ext\n\t\tsubsubdir1\n\tsubdir2\n\t\tsubsubdir2\n\t\t\tfile2.ext"));
+//        System.out.println(nextClosestTime("19:34"));
+//                List<Integer> stringList = Arrays.asList(1,2,3,1,4,3);
+//                List<String> strList = Arrays.asList("cat","act");
+//        System.out.println(checkHm(strList));
 
-//        System.out.println(lengthOfLongestSubstring("abcdedefghijkgabc"));
-//        System.out.println(lengthOfLongestSubstring("abcafg"));
-//        System.out.println(lengthOfLongestSubstring("abcdaefgb"));
+//        System.out.println(longestSubArray(stringList));
+//        int [] num = {10, 9, 2, 5, 3, 7, 101, 18};
+        int[] nums = {2, 4, -2, 1, -3, -3, 6};
+        //18,101,7,3,5,2,9,10
+//        printKSmallest(num,4);
+//        System.out.println(zeroSumSubArray(num));
+//        rotate(num,4);
+//        isValid("(()))");
 
-//        int nums[] = {2,3,-2,4};
-//        System.out.println(maxProduct(nums));
-
-//        int [] arr = {22,3,1,78,79,51,52};
-//        System.out.println(rob(arr));
-
-//        int [] arr1 = {3,3,10,78,79,51,52,76,3};
-//        System.out.println(topKFrequent(arr1,2));
-
-//        System.out.println(isPowerOfRadix(90,3));
-//        System.out.println(isPowerOfRadix(64,4));
-
-//        TreeNode treeNode = new TreeNode(1);
-//         treeNode.left = new TreeNode(2);
-//         treeNode.right = new TreeNode(3);
-//         treeNode.left.left = new TreeNode(4);
-//         treeNode.left.right = new TreeNode(5);
-//         treeNode.right.left = new TreeNode(6);
-//
-////        System.out.println(inorderTraversal(treeNode));
-////        System.out.println(preorderTraversal(treeNode));
-//        System.out.println(postorderTraversal(treeNode));
-
-        List<Integer> arr = Arrays.asList(0, 8, 4, 12, 2, 10, 6, 14, 1, 9);
-        System.out.println(longestNonDecreasingSubSequence(arr));
-
-
+//        System.out.println(multiplyBinary("10","12"));
+//        System.out.println(letterCombinations("23"));
+        System.out.println(maxSubArrayLen(nums, 0));
     }
 
-    //Definition for a binary tree node.
-    public static class TreeNode {
-        int val;
-        TreeNode left;
-        TreeNode right;
 
-        TreeNode(int x) {
-            val = x;
-        }
-    }
-
-    private static class Status {
-        public int numTargetNodes;
-        public TreeNode ancestor;
-    }
 }
