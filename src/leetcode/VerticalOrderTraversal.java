@@ -1,6 +1,5 @@
 package leetcode;
 
-import com.epi.practice.ch5.Array.TreeDepthIterative;
 
 import java.util.*;
 
@@ -33,14 +32,14 @@ public class VerticalOrderTraversal {
      * Get col boundary min and max on the fly
      * Retrieve result from cols
      **/
-    public List<List<Integer>> verticalOrder(TreeDepthIterative.TreeNode root) {
+    public List<List<Integer>> verticalOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
         if (root == null) {
             return res;
         }
 
         Map<Integer, ArrayList<Integer>> map = new HashMap<>();
-        Queue<TreeDepthIterative.TreeNode> q = new LinkedList<>();
+        Queue<TreeNode> q = new LinkedList<>();
         Queue<Integer> cols = new LinkedList<>();
 
         q.add(root);
@@ -50,7 +49,7 @@ public class VerticalOrderTraversal {
         int max = 0;
 
         while (!q.isEmpty()) {
-            TreeDepthIterative.TreeNode node = q.poll();
+            TreeNode node = q.poll();
             int col = cols.poll();
 
             if (!map.containsKey(col)) {
