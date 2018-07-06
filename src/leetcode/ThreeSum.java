@@ -33,8 +33,26 @@ public class ThreeSum {
         return res;
     }
 
+    public static List<List<Integer>> twoSum(int[] num, int K) {
+        Arrays.sort(num);
+        List<List<Integer>> res = new LinkedList<>();
+                int lo = 0, hi = num.length - 1;
+                while (lo < hi) {
+                    if (num[lo] + num[hi] == K) {
+                        res.add(Arrays.asList( num[lo], num[hi]));
+                        while (lo < hi && num[lo] == num[lo + 1]) lo++;
+                        while (lo < hi && num[hi] == num[hi - 1]) hi--;
+                        lo++;
+                        hi--;
+                    } else if (num[lo] + num[hi] < K) lo++;
+                    else hi--;
+                }
+        return res;
+    }
+
     public static void main(String[] args) {
         int[] num = new int[] {1,2,4,-3,-2,5} ;
         System.out.println(threeSum(num,0));
+        System.out.println(twoSum(num,3));
     }
 }
