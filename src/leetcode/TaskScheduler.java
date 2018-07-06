@@ -53,6 +53,26 @@ public class TaskScheduler {
      * <p>
      * 3 identical chunks "CE", "CE CE CE" <-- this is a frame
      * Begin to insert 'A' --> "CEACE CE" <-- result is (c[25] - 1) * (n + 1) + 25 -i = 2 * 3 + 2 = 8
+     *
+     * Find the most frequent chars(tasks) and use them to create Frames. We call these chars Delimiters
+     Suppose we have F Frames and F+1 Delimiters, and for simplicity, we assume the Delimiter is a char 'A'
+     Now we setup all Frames as something like this: A----A----A----A----A
+     We fill the next most frequent chars into these Frames. Keep doing this until (i)
+     there is no remaining chars or (ii) there is no empty slot in Frames
+     Now we're done filling the Frames. We consider the remaining chars.
+
+     (i) No remaining chars means we're done. The length of the sequence is F * length(Frame) + length(Delimiter)
+     (ii) No empty slots in Frames means we have to decide where to put the remaining chars.
+
+     For (ii), Suppose the first char of the remaining chars is 'V', and the length of 'V's is L,
+     with L <= F (or it'll be in the Delimiters).
+     And there are K of them filled into the Frames at the last positions.
+     So there are L-K 'V's left and F-K Frames containing no 'V'. Because L-K <= F-K,
+     we can append L-K 'V' to F-K Frames without violating the rule.
+     After we fill the first remaining chars 'V',
+     we pick the next one and append it to the Frames (length of the chars <= F) .
+     And keep doing this until no char remains.
+     The length of the sequence for (ii) is length(chars)
      */
     public static int leastInterval(char[] tasks, int n) {
 
