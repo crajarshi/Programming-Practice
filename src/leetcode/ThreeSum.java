@@ -12,12 +12,12 @@ import java.util.List;
  * so that n order not to compare repeating elements, because the repeated elements must be adjacent after sorting.
  */
 public class ThreeSum {
-    public List<List<Integer>> threeSum(int[] num) {
+    public static List<List<Integer>> threeSum(int[] num, int K) {
         Arrays.sort(num);
         List<List<Integer>> res = new LinkedList<>();
         for (int i = 0; i < num.length - 2; i++) {
             if (i == 0 || (i > 0 && num[i] != num[i - 1])) {
-                int lo = i + 1, hi = num.length - 1, sum = 0 - num[i];
+                int lo = i + 1, hi = num.length - 1, sum = K - num[i];
                 while (lo < hi) {
                     if (num[lo] + num[hi] == sum) {
                         res.add(Arrays.asList(num[i], num[lo], num[hi]));
@@ -31,5 +31,10 @@ public class ThreeSum {
             }
         }
         return res;
+    }
+
+    public static void main(String[] args) {
+        int[] num = new int[] {1,2,4,-3,-2,5} ;
+        System.out.println(threeSum(num,0));
     }
 }
