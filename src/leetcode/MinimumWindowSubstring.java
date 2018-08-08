@@ -1,6 +1,7 @@
 package leetcode;
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Given a string S and a string T, find the minimum window in S which will contain all the characters in
@@ -54,7 +55,29 @@ public class MinimumWindowSubstring {
         return s.substring(head, tail);
     }
 
+    public static int lengthOfLongestSubstringKDistinct(String s, int k) {
+        Map<Character, Integer> map = new HashMap<>();
+        int lo = 0;
+        int hi = 0;
+        while (hi < s.length()) {
+            map.put(s.charAt(hi), map.getOrDefault(s.charAt(hi), 0) + 1);
+            if (map.size() > k) { // need to slide
+                if (map.get(s.charAt(lo)) == 1)
+                    map.remove(s.charAt(lo));
+                else
+                    map.put(s.charAt(lo), map.get(s.charAt(lo)) - 1);
+                lo++;
+                hi++;
+            } else { // need to extend
+                hi++;
+            }
+        }
+        return hi - lo;
+    }
+
+
     public static void main(String[] args) {
-        System.out.println(minWindow("ADOBECODEBANC", "ABC"));
+//        System.out.println(minWindow("ADOBECODEBANC", "ABC"));
+        System.out.println(lengthOfLongestSubstringKDistinct("eceba", 2));
     }
 }
