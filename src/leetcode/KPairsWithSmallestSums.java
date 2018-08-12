@@ -54,6 +54,18 @@ public class KPairsWithSmallestSums {
 
     public static List<int[]> kSmallestPairs(int[] nums1, int[] nums2, int k) {
         // min queue, sorted by pair sum
+        /**
+         *  A priority queue takes a class which implements a Comparator interface/lambda where the return value of 2
+         *  values compared (let's say A and B) decides the order the two items should go in.
+         If the return value is
+         Negative then A < B
+         0 then A == B
+         Positive then A > B
+
+         So it's essentially comparing if the first two values in a[] are larger than the
+         first two in b[] and using that to sort them. e.g. int a[] {1, 2} comes before
+         int b[] {2, 3} if they are sorted in ascending order, [a, b]
+         */
         PriorityQueue<int[]> q = new PriorityQueue<>((a, b) -> (a[0] + a[1]) - (b[0] + b[1]));
         List<int[]> res = new ArrayList();
         int N1 = nums1.length, N2 = nums2.length;
