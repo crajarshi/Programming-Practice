@@ -44,13 +44,30 @@ public class ItertativeTraversal {
         return true;
     }
 
+    public static int kthSmallest(TreeNode root, int k) {
+        Stack<TreeNode> stack = new Stack<>();
+        while (root != null || !stack.isEmpty()) {
+            if (root != null) {
+                stack.push(root);
+                root = root.left;
+            } else {
+                root = stack.pop();
+                if (--k == 0) return root.val;
+                root = root.right;
+            }
+        }
+        return -1;
+    }
+
     public static void main(String[] args) {
         TreeNode node = new TreeNode(9);
         node.left = new TreeNode(8);
         node.right = new TreeNode(10);
 
         System.out.println(isValidBST(node));
+        System.out.println(kthSmallest(node, 2));
         inOrderTraversal(node);
+
 
     }
 }
