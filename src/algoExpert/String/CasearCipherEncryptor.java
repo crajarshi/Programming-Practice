@@ -1,4 +1,4 @@
-package algoExpert.StringRelated;
+package algoExpert.String;
 
 /**
  * Created by Raj on 5/18/19.
