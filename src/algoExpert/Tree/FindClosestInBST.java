@@ -1,4 +1,4 @@
-package algoExpert;
+package algoExpert.Tree;
 
 /**
  * Created by Raj on 5/18/19.
