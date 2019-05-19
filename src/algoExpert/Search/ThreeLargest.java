@@ -1,4 +1,4 @@
-package algoExpert.Array;
+package algoExpert.Search;
 
 /**
  * Created by Raj on 5/18/19.

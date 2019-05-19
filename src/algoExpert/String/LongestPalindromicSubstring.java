@@ -1,7 +1,13 @@
 package algoExpert.String;
 
 /**
- * Created by Raj on 5/18/19.
+ * Write a function that, given a string, returns its longest palindromic substring.
+ * A palindrome is defined as a string that is written the same forward and backward.
+ * Assume that there will only be one longest palindromic substring.
+
+ Sample input: "abaxyzzyxf"
+ Sample output: "xyzzyx"
+
  */
 public class LongestPalindromicSubstring {
     // O(n^3) time | O(1) space

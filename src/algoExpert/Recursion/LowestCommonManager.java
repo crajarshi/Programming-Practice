@@ -3,7 +3,23 @@ package algoExpert.Recursion;
 import java.util.ArrayList;
 
 /**
- * Created by Raj on 5/19/19.
+ * You're given three inputs, all of which are instances of a class that
+ * have a "directReports" property pointing to their direct reports.
+ * The first input is the top manager in an organizational chart
+ * (i.e., the only instance that is not anybody else's direct report),
+ * and the other two inputs are reports in the organizational chart.
+ * Write a function that returns the lowest common manager to the two reports.
+
+ Sample input: Node A, Node E, Node I (from the ancestral tree below)
+ A
+ /     \
+ B        C
+ /    \    /    \
+ D     E F      G
+ /   \
+ H      I
+ Sample output: Node B
+
  */
 public class LowestCommonManager {
     // O(n) time | O(d) space - where n is the number of people
