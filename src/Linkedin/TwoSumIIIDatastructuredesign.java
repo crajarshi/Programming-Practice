@@ -1,7 +1,9 @@
 package Linkedin;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Design and implement a TwoSum class. It should support the following operations: add and find.
@@ -27,31 +29,27 @@ public class TwoSumIIIDatastructuredesign {
     add operation can be pre-done.
 
 
-     */
+
     Set<Integer> sums = new HashSet<>();
     Set<Integer> nums = new HashSet<>();
 
-    /**
-     * Initialize your data structure here.
-     */
+
     public TwoSumIIIDatastructuredesign() {
 
     }
 
-    /**
-     * Add the number to an internal data structure..
-     */
+
     public void add(int number) {
-        for (int n : nums) sums.add(number + n);
+        for (int n : nums)
+            sums.add(number + n);
         nums.add(number);
     }
 
-    /**
-     * Find if there exists any pair of numbers which sum is equal to the value.
-     */
     public boolean find(int value) {
         return sums.contains(value);
     }
+*/
+
 
     /*
     Map<Integer, Integer> map = new HashMap<>();
@@ -77,5 +75,23 @@ public class TwoSumIIIDatastructuredesign {
     }
      */
 
+    private List<Integer> list = new ArrayList<Integer>();
+    private Map<Integer, Integer> map = new HashMap<Integer, Integer>();
+
+    // Add the number to an internal data structure.
+    public void add(int number) {
+        map.put(number, map.getOrDefault(number, 0) + 1);
+        list.add(number);
+    }
+
+    // Find if there exists any pair of numbers which sum is equal to the value.
+    public boolean find(int value) {
+        for (int i = 0; i < list.size(); i++) {
+            int num1 = list.get(i), num2 = value - num1;
+            if ((num1 == num2 && map.get(num1) > 1) || (num1 != num2 && map.containsKey(num2)))
+                return true;
+        }
+        return false;
+    }
 
 }
