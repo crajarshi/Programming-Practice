@@ -46,7 +46,7 @@ import java.util.List;
  */
 public class FactorCombinations {
 
-    public List<List<Integer>> getFactors(int n) {
+    public static List<List<Integer>> getFactors(int n) {
         List<List<Integer>> ret = new LinkedList<List<Integer>>();
         if (n <= 3) return ret;
         List<Integer> path = new LinkedList<Integer>();
@@ -54,7 +54,8 @@ public class FactorCombinations {
         return ret;
     }
 
-    private void getFactors(int start, int n, List<Integer> path, List<List<Integer>> ret) {
+    private static void getFactors(int start, int n, List<Integer> path,
+                                   List<List<Integer>> ret) {
         for (int i = start; i <= Math.sqrt(n); i++) {
             if (n % i == 0 && n / i >= i) {  // The previous factor is no bigger than the next
                 path.add(i);
@@ -86,5 +87,9 @@ The result should be:
                 path.remove(path.size() - 1);//
             }
         }
+    }
+
+    public static void main(String[] args) {
+        System.out.println(getFactors(16));
     }
 }
