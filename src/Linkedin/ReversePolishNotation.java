@@ -65,4 +65,11 @@ public class ReversePolishNotation {
         }
         return deque.peekFirst();
     }
+
+
+    public static void main(String[] args) {
+        String[] arr = {"10", "6", "9", "3", "+", "-11", "*", "/", "*", "17", "+", "5", "+"};
+//        String[] arr = { 3/2 };
+        System.out.println(evalRPN(arr));
+    }
 }
