@@ -19,6 +19,13 @@ public class FlattenBinaryTree {
     }
 
     public static void main(String[] args) {
+
+        TreeNode treeNode = printTreeNode();
+        flatten(treeNode);
+
+    }
+
+    public static TreeNode printTreeNode() {
         TreeNode treeNode = new TreeNode(1);
         treeNode.left = new TreeNode(2);
         treeNode.right = new TreeNode(5);
@@ -27,11 +34,10 @@ public class FlattenBinaryTree {
         treeNode.left.right = new TreeNode(4);
         treeNode.right.right = new TreeNode(6);
 
-        flatten(treeNode);
-//           while (treeNode != null){
-//               System.out.println(treeNode.val);
-//               treeNode = treeNode.right;
-//           }
-
+        while (treeNode != null) {
+            System.out.println(treeNode.val);
+            treeNode = treeNode.right;
+        }
+        return treeNode;
     }
 }
