@@ -3,7 +3,22 @@ package Facebook;
 import java.util.*;
 
 /**
- * Created by Raj on 6/21/19.
+ *There is a new alien language which uses the latin alphabet.
+ * However, the order among letters are unknown to you.
+ * You receive a list of non-empty words from the dictionary,
+ * where words are sorted lexicographically by the rules of this new language.
+ * Derive the order of letters in this language.
+ *
+ * Input:
+ [
+ "wrt",
+ "wrf",
+ "er",
+ "ett",
+ "rftt"
+ ]
+
+ Output: "wertf"
  */
 public class AlienDictionary {
     /**
