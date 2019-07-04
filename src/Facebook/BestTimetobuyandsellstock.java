@@ -124,14 +124,18 @@ public class BestTimetobuyandsellstock {
 
         //if k >= n/2, then you can make maximum number of transactions.
         if (k >= n / 2) {
-            int maxPro = 0;
-            for (int i = 1; i < n; i++) {
-                if (prices[i] > prices[i - 1])
-                    maxPro += prices[i] - prices[i - 1];
-            }
-            return maxPro;
+            return maxProfit2simple(prices);
         }
+/**
+ * It basically means we can either do not use the prices[j]
+ * (thus, dp[i][j-1]), or use prices[j] (if prices[j] is used,
+ * the last transaction must start some point, jj; then, before jj, we can do at most i - 1 transactions).
 
+ At certain i, j, for each jj, prices[j] is not changing.
+ only prices[jj] and dp[i - 1][jj] are changing. So we can separate prices[j] from prices[jj] and dp[i - 1][jj].
+
+
+ */
         int[][] dp = new int[k + 1][n];
         for (int i = 1; i <= k; i++) {
             int localMax = dp[i - 1][0] - prices[0];
