@@ -14,7 +14,7 @@ package Facebook;
  * 1,1,5 → 1,5,1
  */
 public class NextPermutation {
-    public void nextPermutation(int[] nums) {
+    public static void nextPermutation(int[] nums) {
         int i = nums.length - 2;
         while (i >= 0 && nums[i + 1] <= nums[i]) {//Find first decreasing
             // element scanning from right.
@@ -31,7 +31,7 @@ public class NextPermutation {
         reverse(nums, i + 1);
     }
 
-    private void reverse(int[] nums, int start) {
+    private static void reverse(int[] nums, int start) {
         int i = start, j = nums.length - 1;
         while (i < j) {
             swap(nums, i, j);
@@ -40,9 +40,16 @@ public class NextPermutation {
         }
     }
 
-    private void swap(int[] nums, int i, int j) {
+    private static void swap(int[] nums, int i, int j) {
         int temp = nums[i];
         nums[i] = nums[j];
         nums[j] = temp;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {1, 23, 17};
+        nextPermutation(arr);
+        for (int num : arr)
+            System.out.println(num);
     }
 }
