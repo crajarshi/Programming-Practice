@@ -44,7 +44,8 @@ int[256] for Extended ASCII*/
             i = Math.max(index[s.charAt(j)], i);// index[s.charAt()] will
             // return zero unless the character has been repeated.
             ans = Math.max(ans, j - i + 1);
-            index[s.charAt(j)] = j + 1;
+            index[s.charAt(j)] = j + 1;// This puts the last seen index value
+            // for that character.
         }
         return ans;
     }
