@@ -49,7 +49,8 @@ public class IntersectionOf2Arrays {
      * Time complexity: O(nlogn)
      */
     public int[] intersection2(int[] nums1, int[] nums2) {
-        Set<Integer> set = new HashSet<>();
+        Set<Integer> set = new HashSet<>();//List<Integer> set = new
+        // ArrayList<>(); -> Intersection 2
         Arrays.sort(nums1);
         Arrays.sort(nums2);
         int i = 0;
