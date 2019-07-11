@@ -29,7 +29,7 @@ import java.util.List;
 
  */
 public class CloneGraph {
-    public UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
+    public static UndirectedGraphNode cloneGraph(UndirectedGraphNode node) {
         //For one, it wouldn't be thread safe. If you had multiple threads calling this same function, they'd be writing to the same map,
         // and clobbering each other. This implementation is safer,
         // because it gives each call its own copy of a HashMap, and they don't have to worry about it.
@@ -39,7 +39,8 @@ public class CloneGraph {
         return dfs(node, map);
     }
 
-    private UndirectedGraphNode dfs(UndirectedGraphNode node, HashMap<Integer, UndirectedGraphNode> map) {
+    private static UndirectedGraphNode dfs(UndirectedGraphNode node,
+                                           HashMap<Integer, UndirectedGraphNode> map) {
         if (node == null) return null;
         if (map.containsKey(node.label)) {
             return map.get(node.label);
@@ -53,7 +54,24 @@ public class CloneGraph {
         }
     }
 
-    class UndirectedGraphNode {
+    public static void main(String[] args) {
+        UndirectedGraphNode und1 = new UndirectedGraphNode(1);
+        UndirectedGraphNode und2 = new UndirectedGraphNode(2);
+        UndirectedGraphNode und3 = new UndirectedGraphNode(3);
+        UndirectedGraphNode und4 = new UndirectedGraphNode(4);
+        und1.neighbors.add(new UndirectedGraphNode(2));
+        und1.neighbors.add(new UndirectedGraphNode(und4.label));
+        und2.neighbors.add(new UndirectedGraphNode(und1.label));
+        und2.neighbors.add(new UndirectedGraphNode(und3.label));
+        und3.neighbors.add(new UndirectedGraphNode(und2.label));
+        und3.neighbors.add(new UndirectedGraphNode(und4.label));
+        und4.neighbors.add(new UndirectedGraphNode(und1.label));
+        und4.neighbors.add(new UndirectedGraphNode(und3.label));
+
+        System.out.println(cloneGraph(und1));
+    }
+
+    static class UndirectedGraphNode {
         public int label;
         public List<UndirectedGraphNode> neighbors;
 
