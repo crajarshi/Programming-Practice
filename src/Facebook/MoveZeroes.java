@@ -21,8 +21,9 @@ public class MoveZeroes {
 
     public static void main(String[] args) {
         int[] arr = {3, 2, 5, 0, 9, 7, 0, 8};
-        moveZeroes(arr);
-        for (int num : arr)
+        int[] arr1 = {3, 2, 0, 0, 9, 7, 0, 8};
+        moveZeroes(arr1);
+        for (int num : arr1)
             System.out.println(num);
 
     }

@@ -25,8 +25,8 @@ import java.util.Stack;
  * 5
  * / \
  * 1   4
- * / \
- * 3   6
+ *    / \
+ *   3   6
  * <p>
  * Input: [5,1,4,null,null,3,6]
  * Output: false
