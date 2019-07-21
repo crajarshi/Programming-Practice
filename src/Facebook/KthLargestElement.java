@@ -9,12 +9,12 @@ public class KthLargestElement {
 
     // RC : O(N) AVG, O(N2) worst case || SC O(log N) AVG CASE O(N) worst
     // case -->Recursion stack
-    public int findKthLargest(int[] nums, int k) {
+    public static int findKthLargest(int[] nums, int k) {
         return selectionAlgorithm(nums, 0, nums.length - 1, nums.length -
                 k /*target index*/); // For Kth Smallest just pass K -1 here
     }
 
-    public int selectionAlgorithm(int[] a, int start, int end, int
+    public static int selectionAlgorithm(int[] a, int start, int end, int
             targetIndex) {
         int pivot = getRandom(start, end);
         int result = singlePlacementPartition(a, start, end, pivot);
@@ -27,8 +27,8 @@ public class KthLargestElement {
         }
     }
 
-    public int singlePlacementPartition(int[] a, int start, int end,
-                                        int pivot) {
+    public static int singlePlacementPartition(int[] a, int start, int end,
+                                               int pivot) {
         swap(a, start, pivot);
         int less = start;
         for (int i = start + 1; i <= end; i++) {
@@ -38,15 +38,20 @@ public class KthLargestElement {
         return less;
     }
 
-    public int getRandom(int start, int end) {
+    public static int getRandom(int start, int end) {
         if (start > end) System.out.println();
         return new Random().nextInt(end - start + 1) + start;
     }
 
-    public void swap(int[] arr, int i, int j) {
+    public static void swap(int[] arr, int i, int j) {
         int temp = arr[j];
         arr[j] = arr[i];
         arr[i] = temp;
 
+    }
+
+    public static void main(String[] args) {
+        int[] arr = {2, 6, 4, 7, 9, 1};
+        System.out.println(findKthLargest(arr, 3));
     }
 }
