@@ -81,16 +81,14 @@ public class MinimumWindowSubstring {
         int start = 0, end = 0, maxLen = Integer.MIN_VALUE, counter = 0;
 
         while (end < s.length()) {
-            final char c1 = s.charAt(end);
+            final char c1 = s.charAt(end++);
             if (map[c1] == 0) counter++;
             map[c1]++;
-            end++;
 
             while (counter > k) {
-                final char c2 = s.charAt(start);
+                final char c2 = s.charAt(start++);
                 if (map[c2] == 1) counter--;
                 map[c2]--;
-                start++;
             }
 
             maxLen = Math.max(maxLen, end - start);
