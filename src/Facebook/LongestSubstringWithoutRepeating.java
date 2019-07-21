@@ -38,13 +38,14 @@ int[256] for Extended ASCII*/
 
     public static int lengthOfLongestSubstring(String s) {
         int n = s.length(), ans = 0;
-        int[] index = new int[128]; // current index of character
+        int[] index = new int[26]; // current index of character
         // try to extend the range [i, j]
         for (int j = 0, i = 0; j < n; j++) {
-            i = Math.max(index[s.charAt(j)], i);// index[s.charAt()] will
+            i = Math.max(index[s.charAt(j) - 'a'], i);// index[s.charAt()] will
             // return zero unless the character has been repeated.
             ans = Math.max(ans, j - i + 1);
-            index[s.charAt(j)] = j + 1;// This puts the last seen index value
+            index[s.charAt(j) - 'a'] = j + 1;// This puts the last seen index
+            // value
             // for that character.
         }
         return ans;
