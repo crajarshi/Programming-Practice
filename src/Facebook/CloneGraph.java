@@ -2,6 +2,7 @@ package Facebook;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Given a reference of a node in a connected undirected graph,
@@ -71,6 +72,23 @@ public class CloneGraph {
         System.out.println(cloneGraph(und1));
     }
 
+    public Node cloneGraph(Node node) {
+        if (node == null) return null;
+        Map<Node, Node> map = new HashMap<>();
+        dfs(map, node);
+        return map.get(node);
+    }
+
+    private void dfs(Map<Node, Node> map, Node curr) {
+        if (map.containsKey(curr)) return;
+        map.put(curr, new Node(curr.val));
+        for (Node next : curr.neighbors) {
+            dfs(map, next);
+
+            map.get(curr).neighbors.add(map.get(next));
+        }
+    }
+
     static class UndirectedGraphNode {
         public int label;
         public List<UndirectedGraphNode> neighbors;
@@ -80,6 +98,18 @@ public class CloneGraph {
 
         public UndirectedGraphNode(int _val) {
             label = _val;
+        }
+    }
+
+    static class Node {
+        public int val;
+        public List<Node> neighbors;
+
+        public Node() {
+        }
+
+        public Node(int _val) {
+            val = _val;
         }
     }
 }
