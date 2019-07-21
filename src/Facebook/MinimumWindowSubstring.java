@@ -77,23 +77,26 @@ public class MinimumWindowSubstring {
     }
 
     public int lengthOfLongestSubstringKDistinct(String s, int k) {
-        int[] map = new int[256];
-        int start = 0, end = 0, maxLen = Integer.MIN_VALUE, counter = 0;
+        int maxLen = 0;
+        if (s.length() > 0) {
+            int[] map = new int[256];
+            int start = 0, end = 0, counter = 0;
 
-        while (end < s.length()) {
-            final char c1 = s.charAt(end++);
-            if (map[c1] == 0) counter++;
-            map[c1]++;
+            while (end < s.length()) {
+                final char c1 = s.charAt(end++);
+                if (map[c1] == 0) counter++;
+                map[c1]++;
 
-            while (counter > k) {
-                final char c2 = s.charAt(start++);
-                if (map[c2] == 1) counter--;
-                map[c2]--;
+                while (counter > k) {
+                    final char c2 = s.charAt(start++);
+                    if (map[c2] == 1) counter--;
+                    map[c2]--;
+                }
+
+                maxLen = Math.max(maxLen, end - start);
             }
 
-            maxLen = Math.max(maxLen, end - start);
         }
-
         return maxLen;
     }
 
