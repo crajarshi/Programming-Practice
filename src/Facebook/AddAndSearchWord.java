@@ -21,6 +21,11 @@ package Facebook;
  * You may assume that all words are consist of lowercase letters a-z.
  */
 public class AddAndSearchWord {
+    /**
+     * //Time Complexity:
+     * addWord() - O(n), n = length of the new word
+     * search() - Worst case: O(m), m = the total number of characters in the Trie
+     */
 
     private TrieNode root = new TrieNode();
 
@@ -42,18 +47,18 @@ public class AddAndSearchWord {
         return match(word.toCharArray(), 0, root);
     }
 
-    private boolean match(char[] chs, int k, TrieNode node) {
-        if (k == chs.length) {
+    private boolean match(char[] chs, int index, TrieNode node) {
+        if (index == chs.length) {
             return node.isWord;
         }
-        if (chs[k] == '.') {
+        if (chs[index] == '.') {
             for (int i = 0; i < node.children.length; i++) {
-                if (node.children[i] != null && match(chs, k + 1, node.children[i])) {
+                if (node.children[i] != null && match(chs, index + 1, node.children[i])) {
                     return true;
                 }
             }
         } else {
-            return node.children[chs[k] - 'a'] != null && match(chs, k + 1, node.children[chs[k] - 'a']);
+            return node.children[chs[index] - 'a'] != null && match(chs, index + 1, node.children[chs[index] - 'a']);
         }
         return false;
     }
