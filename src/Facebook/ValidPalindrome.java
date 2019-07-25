@@ -14,6 +14,7 @@ package Facebook;
  * The string will only contain lowercase characters a-z. The maximum length of the string is 50000.
  */
 public class ValidPalindrome {
+    //O(N) TC O(1) SC
     public boolean validPalindrome(String s) {
         int l = 0;
         int r = s.length() - 1;
