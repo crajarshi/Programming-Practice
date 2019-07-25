@@ -17,6 +17,7 @@ package Facebook;
  * Output: [-1,-1]
  */
 public class FindFirstAndLastElement {
+    //O(LOGN) TC O(1) SC
     public static int[] searchRange(int[] nums, int target) {
         double left = target - 0.1, right = target + 0.1;
         int l = bs(nums, left), r = bs(nums, right);

@@ -14,6 +14,7 @@ package Facebook;
  * 1,1,5 → 1,5,1
  */
 public class NextPermutation {
+    //O(N) TC O(1) SC
     public static void nextPermutation(int[] nums) {
         int i = nums.length - 2;
         while (i >= 0 && nums[i + 1] <= nums[i]) {//Find first decreasing

@@ -20,7 +20,7 @@ public class BinaryTreeRightSide {
      * @param root
      * @return
      */
-
+//O(N) Both
     public List<Integer> rightSideView(TreeNode root) {
         List<Integer> result = new ArrayList<Integer>();
         rightView(root, result, 0);

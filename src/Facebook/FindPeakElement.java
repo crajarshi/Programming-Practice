@@ -25,6 +25,7 @@ package Facebook;
  * Your solution should be in logarithmic complexity.
  */
 public class FindPeakElement {
+    //O(LOG N) TC O(1) SC
     public static int findPeakElement(int[] nums) {
         int l = 0, r = nums.length - 1;
         while (l < r) {
