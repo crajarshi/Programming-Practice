@@ -1,8 +1,6 @@
 package Facebook;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Given a non-empty string s and a dictionary wordDict containing a list of non-empty words,
@@ -74,5 +72,28 @@ public class WordBreak {
             }
         }
         return dp[s.length()];
+    }
+
+    public boolean wordBreak1(String s, List<String> dict1) {
+        Set<String> dict = new HashSet<>(dict1);
+        if (dict.contains(s)) return true;
+        Queue<Integer> queue = new LinkedList<Integer>();
+        queue.offer(0);
+        // use a set to record checked index to avoid repeated work.
+        // This is the key to reduce the running time to O(N^2).
+        Set<Integer> visited = new HashSet<Integer>();
+        visited.add(0);
+        while (!queue.isEmpty()) {
+            int curIdx = queue.poll();
+            for (int i = curIdx + 1; i <= s.length(); i++) {
+                if (visited.contains(i)) continue;
+                if (dict.contains(s.substring(curIdx, i))) {
+                    if (i == s.length()) return true;
+                    queue.offer(i);
+                    visited.add(i);
+                }
+            }
+        }
+        return false;
     }
 }
