@@ -29,7 +29,15 @@ public class FlattenBinaryTree {
 
     private static TreeNode prev = null;
 
-    public static void flatten(TreeNode root) {
+    /**
+     * If we traverse the flattened tree in the reverse way, we would notice that [6->5->4->3->2->1]
+     * is in (right, left, root) order of the original tree.
+     * So the reverse order after flattening is post order traversal in (right, left, root) order like [6->5->4->3->2->1].
+     * and then set each node's right pointer as the previous one in [6->5->4->3->2->1],
+     * as such the right pointer behaves similar to a link in the flattened tree(though technically,
+     * it's still a right child reference from the tree data structure's perspective) and set the left child as null before the end of one recursion by
+     */
+    public static void flatten(TreeNode root) {//Post Order traversal
         if (root == null)
             return;
         if (root.right != null) flatten(root.right);
