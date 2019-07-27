@@ -2,7 +2,28 @@ package Facebook;
 
 
 /**
- * Created by Raj on 6/23/19.
+ * Given a binary tree, flatten it to a linked list in-place.
+
+ For example, given the following tree:
+
+ 1
+ / \
+ 2   5
+ / \   \
+ 3   4   6
+ The flattened tree should look like:
+
+ 1
+ \
+ 2
+ \
+ 3
+ \
+ 4
+ \
+ 5
+ \
+ 6
  */
 public class FlattenBinaryTree {
 
@@ -13,7 +34,7 @@ public class FlattenBinaryTree {
             return;
         if (root.right != null) flatten(root.right);
         if (root.left != null) flatten(root.left);
-        root.right = prev;
+        root.right = prev;//
         root.left = null;
         prev = root;
     }
@@ -34,10 +55,10 @@ public class FlattenBinaryTree {
         treeNode.left.right = new TreeNode(4);
         treeNode.right.right = new TreeNode(6);
 
-        while (treeNode != null) {
-            System.out.println(treeNode.val);
-            treeNode = treeNode.right;
-        }
+//        while (treeNode != null) {
+//            System.out.println(treeNode.val);
+//            treeNode = treeNode.right;
+//        }
         return treeNode;
     }
 }
