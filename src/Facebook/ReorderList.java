@@ -51,10 +51,10 @@ public class ReorderList {
         ListNode prev = null;
         ListNode cur = n;
         while (cur != null) {
-            ListNode tmp = cur.next;
-            cur.next = prev;
-            prev = cur;
-            cur = tmp;
+            ListNode tmp = cur.next;//save the next pointer
+            cur.next = prev;//move the current pointer to prec
+            prev = cur;//move prev by 1 to cur
+            cur = tmp;//move cur by 1 to next
         }
         return prev;
     }
