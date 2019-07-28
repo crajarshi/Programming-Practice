@@ -74,13 +74,19 @@ package Facebook;
  */
 public class ReadNCharacters {
 
+    private int prev = 4;
+    private int count = 0;
+
+    /*
+    Basically, call multiple times means, you want to resume where you left off last time.
+    That means, if there are chars left in readChars (from the Read4 from the previous call of ReadN), you want to transfer them into buffer first.
+    */
+    private char[] readChars = new char[4];
+
     /**
      *
      */
 
-    private int prev = 4;
-    private int count = 0;
-    private char[] readChars = new char[4];
 
     public int read(char[] buf, int n) {
 
@@ -112,10 +118,6 @@ public class ReadNCharacters {
         return 4;
     }
 
-    /*
-    Basically, call multiple times means, you want to resume where you left off last time.
-    That means, if there are chars left in readChars (from the Read4 from the previous call of ReadN), you want to transfer them into buffer first.
-    */
     public int read2(char[] buf, int n) {
         int total = 0;
 

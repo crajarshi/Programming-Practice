@@ -1,5 +1,8 @@
 package Facebook;
 
+import java.util.LinkedList;
+import java.util.List;
+
 /**
  * Given a string S and a string T, find the minimum window in S which will contain all the characters in T in complexity O(n).
  * <p>
@@ -48,10 +51,40 @@ public class MinimumWindowSubstring {
         return head == -1 ? "" : s.substring(head, head + window);
     }
 
-    public static void main(String[] args) {
-        System.out.println(minWindow("ADOBECODEBANC", "ABC"));
+    public static List<Integer> findAnagrams(String s, String t) {
+        List<Integer> result = new LinkedList<>();
+        if (t.length() > s.length()) return result;
+        int[] map = new int[128];
+        for (char c : t.toCharArray()) {
+            map[c]++;
+        }
+        int start = 0, end = 0, counter = t.length();
+
+        while (end < s.length()) {
+            final char c1 = s.charAt(end++);
+            if (map[c1] > 0) counter--;
+            map[c1]--;
+
+            while (counter == 0) {
+                if (end - start == t.length()) {
+                    result.add(start);
+                }
+                final char c2 = s.charAt(start++);
+                map[c2]++;
+                if (map[c2] > 0) counter++;
+
+            }
+
+        }
+        return result;
     }
 
+    public static void main(String[] args) {
+//        System.out.println(minWindow("ADOBECODEBANC", "ABC"));
+        System.out.println(findAnagrams("cbaebabacd", "abc"));
+    }
+
+    //O(l1) + O(l2)
     public String minWindow2(String s, String t) {
         int[] map = new int[128];
         for (char c : t.toCharArray()) {
