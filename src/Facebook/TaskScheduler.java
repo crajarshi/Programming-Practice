@@ -28,11 +28,12 @@ import java.util.PriorityQueue;
  * The integer n is in the range [0, 100].
  */
 public class TaskScheduler {
-    public int leastInterval(char[] tasks, int n) {
+    public static int leastInterval(char[] tasks, int n) {
         int[] map = new int[26];
         for (char c : tasks)
             map[c - 'A']++;
-        PriorityQueue<Integer> queue = new PriorityQueue<>(26, Collections.reverseOrder());
+        PriorityQueue<Integer> queue = new PriorityQueue<>(26, Collections
+                .reverseOrder());//MAX HEAP
         for (int f : map) {
             if (f > 0)
                 queue.add(f);
@@ -57,5 +58,10 @@ public class TaskScheduler {
                 queue.add(l);
         }
         return time;
+    }
+
+    public static void main(String[] args) {
+        char[] tasks = {'A', 'A', 'A', 'B', 'B', 'B'};
+        System.out.println(leastInterval(tasks, 2));
     }
 }

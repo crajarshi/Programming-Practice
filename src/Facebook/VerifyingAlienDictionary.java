@@ -55,12 +55,9 @@ public class VerifyingAlienDictionary {
             int length = Math.min(words[i].length(), words[i + 1].length());
             for (int j = 0; j < length; j++)
                 if (words[i].charAt(j) != words[i + 1].charAt(j))
-                    if (index[words[i].charAt(j) - 'a'] > index[words[i + 1].charAt(j) - 'a']) {
-                        System.out.println(index[words[i].charAt(j) - 'a']);
-                        System.out.println(index[words[i + 1].charAt(j) -
-                                'a']);
+                    if (index[words[i].charAt(j) - 'a'] > index[words[i + 1].charAt(j) - 'a'])
                         return false;
-                    } else
+                    else
                         length = -1;
             if (length != -1 && words[i].length() > words[i + 1].length())
                 return false;

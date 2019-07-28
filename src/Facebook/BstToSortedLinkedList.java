@@ -1,10 +1,12 @@
 package Facebook;
 
 /**
- * Convert a BST to a sorted circular doubly-linked list in-place. Think of the left and right pointers as synonymous to the previous and next pointers in a doubly-linked list.
+ * Convert a BST to a sorted circular doubly-linked list in-place.
+ * Think of the left and right pointers as synonymous to the previous and next pointers in a doubly-linked list.
 
 
  */
+//O(N) and O(N)
 public class BstToSortedLinkedList {
 
     // the smallest (first) and the largest (last) TreeNodes
@@ -22,24 +24,24 @@ public class BstToSortedLinkedList {
 
     }
 
-    public void helper(TreeNode TreeNode) {
-        if (TreeNode != null) {
+    public void helper(TreeNode node) {
+        if (node != null) {
             // left
-            helper(TreeNode.left);
+            helper(node.left);
             // TreeNode
             if (last != null) {
                 // link the previous TreeNode (last)
                 // with the current one (TreeNode)
-                last.right = TreeNode;
-                TreeNode.left = last;
+                last.right = node;
+                node.left = last;
             } else {
                 // keep the smallest TreeNode
                 // to close DLL later on
-                first = TreeNode;
+                first = node;
             }
-            last = TreeNode;
+            last = node;
             // right
-            helper(TreeNode.right);
+            helper(node.right);
         }
     }
 

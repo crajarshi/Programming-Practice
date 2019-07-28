@@ -25,7 +25,8 @@ import java.util.LinkedList;
  * Clarification: The above format is the same as how LeetCode serializes a binary tree.
  * You do not necessarily need to follow this format, so please be creative and come up with different approaches yourself.
  * <p>
- * Note: Do not use class member/global/static variables to store states. Your serialize and deserialize algorithms should be stateless.
+ * Note: Do not use class member/global/static variables to store states.
+ * Your serialize and deserialize algorithms should be stateless.
  */
 public class SerializeDeserializeBinaryTree {
     private static final String spliter = ",";
