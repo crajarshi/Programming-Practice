@@ -1,7 +1,8 @@
 package Facebook;
 
 /**
- * n an alien language, surprisingly they also use english lowercase letters, but possibly in a different order.
+ * In an alien language, surprisingly they also use english lowercase
+ * letters, but possibly in a different order.
  * The order of the alphabet is some permutation of lowercase letters.
  * <p>
  * Given a sequence of words written in the alien language,

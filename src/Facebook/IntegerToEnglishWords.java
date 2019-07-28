@@ -57,7 +57,8 @@ public class IntegerToEnglishWords {
     }
 
     public static void main(String[] args) {
-        System.out.println(numberToWords(457020720));
+//        System.out.println(numberToWords(457020720));
+        System.out.println(numberToWords(2000));
     }
 
 }
