@@ -45,6 +45,11 @@ public class ShortestDistanceFromAllBuilding {
         return min == Integer.MAX_VALUE ? -1 : min;
     }
 
+    /**
+     * don't use a fresh "visited" for each BFS. Instead, I walk only onto the cells that were reachable from all previous buildings.
+     * From the first building I only walk onto cells where grid is 0, and make them -1.
+     * From the second building I only walk onto cells where grid is -1, and I make them -2. And so on.
+     */
     private void bfsVisit(int[][] grid, int[][] dist, int row, int col, int start) {
         Deque<int[]> que = new ArrayDeque<int[]>();
         que.offer(new int[]{row, col});
