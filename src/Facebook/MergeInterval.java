@@ -54,7 +54,7 @@ public class MergeInterval {
 //            return intervals;
 //
 //        // Sort by ascending starting point using an anonymous Comparator
-//        intervals.sort((i1, i2) -> Integer.compare(i1.start, i2.start));
+//      intervals.sort((i1, i2) -> Integer.compare(i1.start, i2.start));
 //
 //        List<Interval> result = new LinkedList<Interval>();
 //        int start = intervals.get(0).start;
