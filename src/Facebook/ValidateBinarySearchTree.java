@@ -1,6 +1,8 @@
 package Facebook;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Stack;
 
 /**
@@ -25,8 +27,8 @@ import java.util.Stack;
  * 5
  * / \
  * 1   4
- *    / \
- *   3   6
+ * / \
+ * 3   6
  * <p>
  * Input: [5,1,4,null,null,3,6]
  * Output: false
@@ -38,57 +40,54 @@ public class ValidateBinarySearchTree {
     public boolean isValidBST(TreeNode root) {
         if (root == null) return true;
         Stack<TreeNode> stack = new Stack<>();
-        TreeNode pre = null;
+        TreeNode inorder = null;
         while (root != null || !stack.isEmpty()) {
             while (root != null) {
                 stack.push(root);
                 root = root.left;
             }
             root = stack.pop();
-            if (pre != null && root.val <= pre.val) return false;
-            pre = root;
+            if (inorder != null && root.val <= inorder.val) return false;
+            inorder = root;
             root = root.right;
         }
         return true;
     }
 
-    /**  Binary Tree Inorder Traversal
-     *
-     *
-     * public List<Integer> inorderTraversal(TreeNode root) {
-     List<Integer> list = new ArrayList<>();
-     if(root == null) return list;
-     Stack<TreeNode> stack = new Stack<>();
-     while(root != null || !stack.empty()){
-     while(root != null){
-     stack.push(root);
-     root = root.left;
-     }
-     root = stack.pop();
-     list.add(root.val);
-     root = root.right;
+    //  Binary Tree Inorder Traversal
 
-     }
-     return list;
-     }
-     */
+    public List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> list = new ArrayList<>();
+        if (root == null) return list;
+        Stack<TreeNode> stack = new Stack<>();
+        while (root != null || !stack.empty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            list.add(root.val);
+            root = root.right;
+
+        }
+        return list;
+    }
 
 
-    /**   Kth Smallest Element in a BST
-     *
-     *  public int kthSmallest(TreeNode root, int k) {
-     Stack<TreeNode> stack = new Stack<>();
-     while(root != null || !stack.isEmpty()) {
-     while(root != null) {
-     stack.push(root);
-     root = root.left;
-     }
-     root = stack.pop();
-     if(--k == 0) break;
-     root = root.right;
-     }
-     return root.val;
-     }
-     */
+    //Kth Smallest Element in a BST
+    public int kthSmallest(TreeNode root, int k) {
+        Stack<TreeNode> stack = new Stack<>();
+        while (root != null || !stack.isEmpty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            if (--k == 0) break;
+            root = root.right;
+        }
+        return root.val;
+    }
+
 
 }

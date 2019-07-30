@@ -12,7 +12,8 @@ import java.util.*;
  * but all of their accounts definitely have the same name.
  * <p>
  * After merging the accounts, return the accounts in the following format:
- * the first element of each account is the name, and the rest of the elements are emails in sorted order. The accounts themselves can be returned in any order.
+ * the first element of each account is the name, and the rest of the elements are emails in sorted order.
+ * The accounts themselves can be returned in any order.
  * <p>
  * Example 1:
  * Input:
@@ -27,48 +28,6 @@ import java.util.*;
  * ['John', 'john00@mail.com', 'john_newyork@mail.com', 'johnsmith@mail.com']] would still be accepted.
  */
 public class AccountsMerge {
-    public static List<List<String>> accountsMerge(List<List<String>> accounts) {
-        Map<String, String> emailToName = new HashMap();
-        Map<String, ArrayList<String>> graph = new HashMap();
-        for (List<String> account : accounts) {
-            String name = "";
-            for (String email : account) {
-                if (name == "") {
-                    name = email;
-                    continue;
-                }
-                graph.computeIfAbsent(email, x -> new ArrayList<String>()).add(account.get(1));
-                graph.computeIfAbsent(account.get(1), x -> new ArrayList<String>()).add(email);
-                emailToName.put(email, name);
-            }
-        }
-
-        Set<String> seen = new HashSet();
-        List<List<String>> ans = new ArrayList();
-        for (String email : graph.keySet()) {
-            if (!seen.contains(email)) {
-                seen.add(email);
-                Stack<String> stack = new Stack();
-                stack.push(email);
-                List<String> component = new ArrayList();
-                while (!stack.empty()) {
-                    String node = stack.pop();
-                    component.add(node);
-                    for (String nei : graph.get(node)) {
-                        if (!seen.contains(nei)) {
-                            seen.add(nei);
-                            stack.push(nei);
-                        }
-                    }
-                }
-                Collections.sort(component);
-                component.add(0, emailToName.get(email));
-                ans.add(component);
-            }
-        }
-        return ans;
-    }
-
     /**
      * Step1
      * ======
@@ -133,7 +92,6 @@ public class AccountsMerge {
         return p.get(s) == s ? s : find(p.get(s), p);
     }
 
-
     public static void main(String[] args) {
         List<String> lstAccount = Arrays.asList("John", "johnsmith@mail.com", "john00@mail.com");
         List<String> lstAccount1 = Arrays.asList("John", "johnsmith@mail.com", "john_newyork@mail.com");
@@ -148,5 +106,62 @@ public class AccountsMerge {
 
         System.out.println(accountsMergeUnionfind(accounts));
 
+    }
+
+    /**
+     * Basicly, this is a graph problem. Notice that each account[ i ] tells us some edges. What we have to do is as follows:
+     * <p>
+     * Use these edges to build some components.
+     * Common email addresses are like the intersections that connect each single component for each account.
+     * Because each component represents a merged account,
+     * do DFS search for each components and add into a list.
+     * Before add the name into this list, sort the emails. Then add name string into it.
+     * Examples: Assume we have three accounts, we connect them like this in order to use DFS.
+     * {Name, 1, 2, 3} => Name -- 1 -- 2 -- 3
+     * {Name, 2, 4, 5} => Name -- 2 -- 4 -- 5 (The same graph node 2 appears)
+     * {Name, 6, 7, 8} => Name -- 6 -- 7 -- 8
+     * (Where numbers represent email addresses).
+     */
+    public List<List<String>> accountsMerge(List<List<String>> accounts) {
+        Map<String, Set<String>> graph = new HashMap<>();  //<email node, neighbor nodes>
+        Map<String, String> name = new HashMap<>();        //<email, username>
+        // Build the graph;
+        for (List<String> account : accounts) {
+            String userName = account.get(0);
+            for (int i = 1; i < account.size(); i++) {
+                if (!graph.containsKey(account.get(i))) {
+                    graph.put(account.get(i), new HashSet<>());
+                }
+                name.put(account.get(i), userName);
+
+                if (i == 1) continue;
+                graph.get(account.get(i)).add(account.get(i - 1));
+                graph.get(account.get(i - 1)).add(account.get(i));
+            }
+        }
+
+        Set<String> visited = new HashSet<>();
+        List<List<String>> res = new LinkedList<>();
+        // DFS search the graph;
+        for (String email : name.keySet()) {
+            List<String> list = new LinkedList<>();
+            if (visited.add(email)) {
+                dfs(graph, email, visited, list);
+                Collections.sort(list);
+                list.add(0, name.get(email));
+                res.add(list);
+            }
+        }
+
+        return res;
+    }
+
+    public void dfs(Map<String, Set<String>> graph, String email, Set<String> visited, List<String> list) {
+        list.add(email);
+        for (String next : graph.get(email)) {
+            if (visited.add(next)) {
+                dfs(graph, next, visited, list);
+            }
+        }
     }
 }
