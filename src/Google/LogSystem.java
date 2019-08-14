@@ -35,6 +35,11 @@ public class LogSystem {
      * Given the granularity we can set a lower bound and upper bound of timestamp so we could do a range query using TreeMap.
      * To get the lower bound we append a suffix of "2000:01:01:00:00:00" to the prefix of s and to get the upper bound
      * we append a suffix of "2017:12:31:23:59:59" to the prefix of e.
+     *
+     * Because String implements interface called Comparable
+     * which compares two strings according to their lexicographical order.
+     More over, you can't put an object as a key into a TreeMap structure
+     if a class of that object doesn't implement Comparable interface, you will get java.lang.ClassCastException trying to do that.
      */
     private String min, max;
     private HashMap<String, Integer> map;
