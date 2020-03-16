@@ -44,7 +44,7 @@ public class MinimumRemoveInvalidParenthesis {
      * but you could reuse the first one by replacing the ( in place and prune
      * the starting open number of chars.
      */
-    public String minRemoveToMakeValid(String s) {
+    public static String minRemoveToMakeValid(String s) {
         StringBuilder sb = new StringBuilder();
         int open = 0;
         for (char c : s.toCharArray()) {
@@ -66,6 +66,26 @@ public class MinimumRemoveInvalidParenthesis {
         return result.reverse().toString();
     }
 
+    public static void main(String[] args) {
+//        System.out.println(minRemoveToMakeValid("lee(t(c)o)de)"));
+//        System.out.println(minRemoveToMakeValid("a)b(c)d"));
+        System.out.println(minRemoveToMakeValid("))(("));
+    }
+
+    /**
+     * To make the string valid with minimum removals, we need to get rid of
+     * all parentheses that do not have a matching pair.
+     * <p>
+     * Push char index into the stack when we see '('.
+     * <p>
+     * Pop from the stack when we see ')'.
+     * <p>
+     * If the stack is empty, then we have ')' without the pair, and it needs to be removed.
+     * In the end, the stack will contain indexes of '(' without the pair, if any. We need to remove all of them too.
+     *
+     * @param s
+     * @return
+     */
     public String minRemoveToMakeValid2(String s) {
         StringBuilder sb = new StringBuilder(s);
         Stack<Integer> st = new Stack<>();
