@@ -65,9 +65,57 @@ public class VerifyingAlienDictionary {
         return true;
     }
 
+    /**
+     * Build a transform mapping from order,
+     * Find all alien words with letters in normal order.
+     * <p>
+     * For example, if we have order = "xyz..."
+     * We can map the word "xyz" to "abc" or "123"
+     * <p>
+     * Then we check if all words are in sorted order.
+     * <p>
+     * Complexity
+     * Time O(NS)
+     * Space O(1)
+     * <p>
+     * N is the length of words since we go through the words list to compare each string with its previous one.
+     * S is the max length of word in the words list since in the helper function, the worst case is encounter the max string.
+     * I guess that's the meaning of N and S.
+     *
+     * @param words
+     * @param order
+     * @return
+     */
+
+    public static boolean isAlienSortedbetter(String[] words, String order) {
+        int[] dict = new int[26];
+        for (int i = 0; i < dict.length; i++) {
+            int idx = order.charAt(i) - 'a';
+            dict[idx] = i;
+        }
+        for (int i = 0; i < words.length - 1; i++) {
+            if (compare(words[i], words[i + 1], dict) > 0) return false;
+        }
+
+        return true;
+    }
+
+    private static int compare(String word1, String word2, int[] dict) {
+        int L1 = word1.length();
+        int L2 = word2.length();
+        int min = Math.min(L1, L2);
+        for (int i = 0; i < min; i++) {
+            int c1 = word1.charAt(i) - 'a';
+            int c2 = word2.charAt(i) - 'a';
+            if (c1 != c2)
+                return dict[c1] - dict[c2];
+        }
+        return L1 == min ? -1 : 1;
+    }
+
     public static void main(String[] args) {
         String[] str = {"word", "world", "row"};
         String order = "worldabcefghijkmnpqstuvxyz";
-        System.out.println(isAlienSorted(str, order));
+        System.out.println(isAlienSortedbetter(str, order));
     }
 }
