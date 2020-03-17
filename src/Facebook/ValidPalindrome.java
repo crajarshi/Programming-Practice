@@ -24,6 +24,8 @@ public class ValidPalindrome {
      * 2.2) Remove Right Element and Check for the Rest of the string.
      * If either of them dont give palindrome then its not a palindorme.
      *
+     * TC :O(N) Linear time. You look at each character once, but once you have a mismatch, you look at each character in the midstring up to two times.
+     *
      * @param s
      * @return
      */
