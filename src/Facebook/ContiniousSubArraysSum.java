@@ -31,8 +31,9 @@ public class ContiniousSubArraysSum {
      * We iterate through the input array exactly once, keeping track of the running sum mod k of the elements in the process.
      * If we find that a running sum value at index j has been previously seen before in some earlier index i in the array,
      * then we know that the sub-array (i,j] contains a desired sum.
+     * O(n) time O(k) space
      */
-    public boolean checkSubarraySum(int[] nums, int k) {
+    public static boolean checkSubarraySum(int[] nums, int k) {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>() {{
             put(0, -1);
         }};
@@ -47,5 +48,10 @@ public class ContiniousSubArraysSum {
             } else map.put(runningSum, i);
         }
         return false;
+    }
+
+    public static void main(String[] args) {
+        int[] nums = {23, 2, 6, 4, 7};
+        System.out.println(checkSubarraySum(nums, 6));
     }
 }
