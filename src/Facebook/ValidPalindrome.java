@@ -14,6 +14,19 @@ package Facebook;
  * The string will only contain lowercase characters a-z. The maximum length of the string is 50000.
  */
 public class ValidPalindrome {
+    /**
+     * Just maintain 2 pointers i.e for start and end of string
+     * Keep checking if they are same
+     * <p>
+     * If they are Same - then just check inside and keep going till you reach the center(left==right)(if odd string) or left>right (if even string)
+     * If they are NOT same : You now have 2 options
+     * 2.1) Remove Left Element and Check for the Rest of String OR
+     * 2.2) Remove Right Element and Check for the Rest of the string.
+     * If either of them dont give palindrome then its not a palindorme.
+     *
+     * @param s
+     * @return
+     */
     //O(N) TC O(1) SC
     public boolean validPalindrome(String s) {
         int l = 0;
