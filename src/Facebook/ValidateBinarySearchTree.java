@@ -37,6 +37,7 @@ import java.util.Stack;
 public class ValidateBinarySearchTree {
 
 
+    //  Binary Tree Inorder Traversal
     public static List<Integer> inorderTraversal(TreeNode root) {
         List<Integer> result = new ArrayList<>();
         if (root == null) return result;
@@ -54,24 +55,7 @@ public class ValidateBinarySearchTree {
         return result;
     }
 
-    //  Binary Tree Inorder Traversal
-
-    public static void main(String[] args) {
-        TreeNode node = new TreeNode(5);
-        node.left = new TreeNode(3);
-        node.left.left = new TreeNode(1);
-        node.left.right = new TreeNode(4);
-        node.right = new TreeNode(6);
-        node.right.left = new TreeNode(2);
-
-        for (Integer lst : inorderTraversal(node)) {
-            System.out.print(lst.toString() + " ->");
-        }
-
-
-    }
-
-    public boolean isValidBST(TreeNode root) {
+    public static boolean isValidBST(TreeNode root) {
         if (root == null) return true;
         Stack<TreeNode> stack = new Stack<>();
         TreeNode inorder = null;
@@ -88,6 +72,22 @@ public class ValidateBinarySearchTree {
         return true;
     }
 
+    public static void main(String[] args) {
+        TreeNode node = new TreeNode(5);
+        node.left = new TreeNode(3);
+        node.left.left = new TreeNode(1);
+        node.left.right = new TreeNode(4);
+        node.right = new TreeNode(6);
+        node.right.left = new TreeNode(2);
+
+        for (Integer lst : inorderTraversal(node)) {
+            System.out.print(lst.toString() + " ->");
+        }
+
+        System.out.println(isValidBST(node));
+
+    }
+
     //Kth Smallest Element in a BST
     public int kthSmallest(TreeNode root, int k) {
         Stack<TreeNode> stack = new Stack<>();
@@ -102,5 +102,4 @@ public class ValidateBinarySearchTree {
         }
         return root.val;
     }
-
 }
