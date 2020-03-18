@@ -53,19 +53,19 @@ public class BinaryTreeMaxPathSum {
         return Math.max(left, right) + node.val;
     }
 
-    public int maxPathSum2(TreeNode root) {
+    public int maxPathSumWithoutGlobal(TreeNode root) {
         int[] max = new int[1];
         max[0] = Integer.MIN_VALUE;
-        maxPathSumWithoutGlobal(max, root);
+        maxPathSum(max, root);
         return max[0];
     }
 
-    private int maxPathSumWithoutGlobal(int[] max, TreeNode node) {
-        if (node == null)
+    private int maxPathSum(int[] max, TreeNode root) {
+        if (root == null)
             return 0;
-        int leftMax = Math.max(0, maxPathSum(max, node.left));
-        int rightMax = Math.max(0, maxPathSum(max, node.right));
-        max[0] = Math.max(max[0], node.val + leftMax + rightMax);
-        return node.val + Math.max(leftMax, rightMax);
+        int leftMax = Math.max(0, maxPathSum(max, root.left));
+        int rightMax = Math.max(0, maxPathSum(max, root.right));
+        max[0] = Math.max(max[0], root.val + leftMax + rightMax);
+        return root.val + Math.max(leftMax, rightMax);
     }
 }
