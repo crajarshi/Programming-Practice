@@ -21,17 +21,13 @@ package Facebook;
 public class FirstBadVersion {
 
     public int firstBadVersion(int n) {
-        int left = 1;
-        int right = n;
-        while (left < right) {
-            int mid = left + (right - left) / 2;
-            if (isBadVersion(mid)) {
-                right = mid;
-            } else {
-                left = mid + 1;
-            }
+        int start = 1, end = n;
+        while (start < end) {
+            int mid = start + (end - start) / 2;
+            if (!isBadVersion(mid)) start = mid + 1;
+            else end = mid;
         }
-        return left;
+        return start;
     }
 
     private boolean isBadVersion(int n) {

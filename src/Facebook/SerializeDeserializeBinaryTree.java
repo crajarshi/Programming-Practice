@@ -29,8 +29,38 @@ import java.util.LinkedList;
  * Your serialize and deserialize algorithms should be stateless.
  */
 public class SerializeDeserializeBinaryTree {
+    /**
+     * The idea is simple: print the tree in pre-order traversal and use "X" to
+     * denote null node and split node with ",". We can use a StringBuilder for building the string on the fly.
+     * For deserializing, we use a Queue to store the pre-order traversal and since we have "X" as null node,
+     * we know exactly how to where to end building subtress.
+     **/
+
     private static final String spliter = ",";
     private static final String NN = "X";
+
+    // Decodes your encoded data to tree.
+    public static TreeNode deserialize(String data) {
+        Deque<String> nodes = new LinkedList<>();
+        nodes.addAll(Arrays.asList(data.split(spliter)));
+        return buildTree(nodes);
+    }
+
+    private static TreeNode buildTree(Deque<String> nodes) {
+        String val = nodes.remove();
+        if (val.equals(NN)) return null;
+        else {
+            TreeNode node = new TreeNode(Integer.valueOf(val));
+            node.left = buildTree(nodes);
+            node.right = buildTree(nodes);
+            return node;
+        }
+    }
+
+    public static void main(String[] args) {
+        String str = "1,X,2,3,X,X";
+        System.out.println(deserialize(str));
+    }
 
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
@@ -39,32 +69,13 @@ public class SerializeDeserializeBinaryTree {
         return sb.toString();
     }
 
-    private void buildString(TreeNode node, StringBuilder sb) {//1,2,3,X,
-        // X,4,X,X,5,X,X,
+    private void buildString(TreeNode node, StringBuilder sb) {
         if (node == null) {
             sb.append(NN).append(spliter);
         } else {
             sb.append(node.val).append(spliter);
             buildString(node.left, sb);
             buildString(node.right, sb);
-        }
-    }
-
-    // Decodes your encoded data to tree.
-    public TreeNode deserialize(String data) {
-        Deque<String> nodes = new LinkedList<>();
-        nodes.addAll(Arrays.asList(data.split(spliter)));
-        return buildTree(nodes);
-    }
-
-    private TreeNode buildTree(Deque<String> nodes) {
-        String val = nodes.remove();
-        if (val.equals(NN)) return null;
-        else {
-            TreeNode node = new TreeNode(Integer.valueOf(val));
-            node.left = buildTree(nodes);
-            node.right = buildTree(nodes);
-            return node;
         }
     }
 }
