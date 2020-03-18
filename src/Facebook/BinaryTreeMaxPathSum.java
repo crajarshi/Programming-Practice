@@ -34,6 +34,8 @@ public class BinaryTreeMaxPathSum {
      * which is also the lowest common ancestor of all other nodes on the path.
      * A recursive method maxPathDown(TreeNode node) (1) computes the maximum path sum
      * with highest node is the input node, update maximum if necessary (2) returns the maximum sum of the path that can be extended to input node's parent.
+     *
+     * TC - O(N)
      */
     int maxValue;
 
@@ -58,12 +60,12 @@ public class BinaryTreeMaxPathSum {
         return max[0];
     }
 
-    private int maxPathSum(int[] max, TreeNode root) {
-        if (root == null)
+    private int maxPathSum(int[] max, TreeNode node) {
+        if (node == null)
             return 0;
-        int leftMax = Math.max(0, maxPathSum(max, root.left));
-        int rightMax = Math.max(0, maxPathSum(max, root.right));
-        max[0] = Math.max(max[0], root.val + leftMax + rightMax);
-        return root.val + Math.max(leftMax, rightMax);
+        int leftMax = Math.max(0, maxPathSum(max, node.left));
+        int rightMax = Math.max(0, maxPathSum(max, node.right));
+        max[0] = Math.max(max[0], node.val + leftMax + rightMax);
+        return node.val + Math.max(leftMax, rightMax);
     }
 }
