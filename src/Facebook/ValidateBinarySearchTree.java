@@ -37,6 +37,40 @@ import java.util.Stack;
 public class ValidateBinarySearchTree {
 
 
+    public static List<Integer> inorderTraversal(TreeNode root) {
+        List<Integer> result = new ArrayList<>();
+        if (root == null) return result;
+        Stack<TreeNode> stack = new Stack<>();
+        while (root != null || !stack.empty()) {
+            while (root != null) {
+                stack.push(root);
+                root = root.left;
+            }
+            root = stack.pop();
+            result.add(root.val);
+            root = root.right;
+
+        }
+        return result;
+    }
+
+    //  Binary Tree Inorder Traversal
+
+    public static void main(String[] args) {
+        TreeNode node = new TreeNode(5);
+        node.left = new TreeNode(3);
+        node.left.left = new TreeNode(1);
+        node.left.right = new TreeNode(4);
+        node.right = new TreeNode(6);
+        node.right.left = new TreeNode(2);
+
+        for (Integer lst : inorderTraversal(node)) {
+            System.out.print(lst.toString() + " ->");
+        }
+
+
+    }
+
     public boolean isValidBST(TreeNode root) {
         if (root == null) return true;
         Stack<TreeNode> stack = new Stack<>();
@@ -54,26 +88,6 @@ public class ValidateBinarySearchTree {
         return true;
     }
 
-    //  Binary Tree Inorder Traversal
-
-    public List<Integer> inorderTraversal(TreeNode root) {
-        List<Integer> list = new ArrayList<>();
-        if (root == null) return list;
-        Stack<TreeNode> stack = new Stack<>();
-        while (root != null || !stack.empty()) {
-            while (root != null) {
-                stack.push(root);
-                root = root.left;
-            }
-            root = stack.pop();
-            list.add(root.val);
-            root = root.right;
-
-        }
-        return list;
-    }
-
-
     //Kth Smallest Element in a BST
     public int kthSmallest(TreeNode root, int k) {
         Stack<TreeNode> stack = new Stack<>();
@@ -88,6 +102,5 @@ public class ValidateBinarySearchTree {
         }
         return root.val;
     }
-
 
 }
