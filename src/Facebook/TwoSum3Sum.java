@@ -3,7 +3,22 @@ package Facebook;
 import java.util.*;
 
 /**
- * Created by Raj on 7/21/19.
+ * Given an array nums of n integers, are there elements a, b, c in nums such that a + b + c = 0?
+ * Find all unique triplets in the array which gives the sum of zero.
+
+ Note:
+
+ The solution set must not contain duplicate triplets.
+
+ Example:
+
+ Given array nums = [-1, 0, 1, 2, -1, -4],
+
+ A solution set is:
+ [
+ [-1, 0, 1],
+ [-1, -1, 2]
+ ]
  */
 public class TwoSum3Sum {
     public int[] twoSum(int[] nums, int target) {
@@ -27,17 +42,17 @@ public class TwoSum3Sum {
                 while (lo < hi) {
                     if (num[lo] + num[hi] == sum) {
                         res.add(Arrays.asList(num[i], num[lo], num[hi]));
-                        while (lo < hi && num[lo] == num[lo + 1]) lo++;
-                        while (lo < hi && num[hi] == num[hi - 1]) hi--;
+//                        while (lo < hi && num[lo] == num[lo + 1]) lo++;
+//                        while (lo < hi && num[hi] == num[hi - 1]) hi--;
                         lo++;
                         hi--;
                     } else if (num[lo] + num[hi] < sum) {
                         // improve: skip duplicates
-                        while (lo < hi && num[lo] == num[lo + 1]) lo++;
+//                        while (lo < hi && num[lo] == num[lo + 1]) lo++;
                         lo++;
                     } else {
                         // improve: skip duplicates
-                        while (lo < hi && num[hi] == num[hi - 1]) hi--;
+//                        while (lo < hi && num[hi] == num[hi - 1]) hi--;
                         hi--;
                     }
                 }
