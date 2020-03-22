@@ -25,7 +25,7 @@ public class MultiplyStrings {
      * `num1[i] * num2[j]` will be placed at indices `[i + j`, `i + j + 1]`
      * i.e., res[i+j] is used to store the carry value and res[i+j+1] is used to rightmost digit of the sum.
      */
-    public String multiply(String num1, String num2) {
+    public static String multiply(String num1, String num2) {
         int m = num1.length(), n = num2.length();
         int[] pos = new int[m + n];
 
@@ -43,5 +43,10 @@ public class MultiplyStrings {
         StringBuilder sb = new StringBuilder();
         for (int p : pos) if (!(sb.length() == 0 && p == 0)) sb.append(p);
         return sb.length() == 0 ? "0" : sb.toString();
+    }
+
+    public static void main(String[] args) {
+        String num1 = "123", num2 = "456";
+        System.out.println(multiply(num1, num2));
     }
 }
