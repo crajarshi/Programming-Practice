@@ -93,8 +93,8 @@ public class MinimumWindowSubstring {
         int start = 0, end = 0, minStart = 0, minLen = Integer.MAX_VALUE, counter = t.length();
         while (end < s.length()) {
             final char c1 = s.charAt(end++);
-            if (map[c1] > 0) counter--;
-            map[c1]--;
+            if (map[c1]-- > 0) counter--;
+//            map[c1]--;
             while (counter == 0) {
                 if (minLen > end - start) {
                     minLen = end - start;
@@ -133,6 +133,7 @@ public class MinimumWindowSubstring {
         return maxLen;
     }
 
+    // Find substring with 0 distinct charcters
     public int lengthOfLongestSubstring2(String s) {
         int[] map = new int[128];
         int start = 0, end = 0, maxLen = 0, counter = 0;

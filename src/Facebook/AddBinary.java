@@ -16,7 +16,7 @@ package Facebook;
  */
 public class AddBinary {
 
-    public String addBinary(String a, String b) {
+    public static String addBinary(String a, String b) {
         StringBuilder sb = new StringBuilder(); //Google immutability or string vs stringbuilder if you don't know why we use this instead of regular string
         int i = a.length() - 1, j = b.length() - 1, carry = 0; //two pointers starting from the back, just think of adding two regular ints from you add from back
         while (i >= 0 || j >= 0) {
@@ -29,5 +29,11 @@ public class AddBinary {
         }
         if (carry != 0) sb.append(carry); //leftover carry, add it
         return sb.reverse().toString();
+    }
+
+    public static void main(String[] args) {
+        String a = "11";
+        String b = "1";
+        System.out.println(addBinary(a, b));
     }
 }
