@@ -1,7 +1,16 @@
 package Facebook;
 
 /**
- * Created by Raj on 6/24/19.
+ * Given an array nums, write a function to move all 0's to the end of it while maintaining the relative order of the non-zero elements.
+
+ Example:
+
+ Input: [0,1,0,3,12]
+ Output: [1,3,12,0,0]
+ Note:
+
+ You must do this in-place without making a copy of the array.
+ Minimize the total number of operations.
  */
 public class MoveZeroes {
 
@@ -22,8 +31,9 @@ public class MoveZeroes {
     public static void main(String[] args) {
         int[] arr = {3, 2, 5, 0, 9, 7, 0, 8};
         int[] arr1 = {3, 2, 0, 0, 9, 7, 0, 8};
-        moveZeroes(arr1);
-        for (int num : arr1)
+        int[] arr12 = {0, 1, 0, 3, 12};
+        moveZeroes(arr12);
+        for (int num : arr12)
             System.out.println(num);
 
     }
