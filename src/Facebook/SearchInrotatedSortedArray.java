@@ -36,7 +36,8 @@ And then we can simply do ordinary binary search.
 
 Of course we don't actually adjust the whole array but instead adjust only on the fly only the elements we look at.
 And the adjustment is done by comparing both the target and the actual element against nums[0].
-If nums[mid] and target are "on the same side" of nums[0], we just take nums[mid]. Otherwise we use -infinity or +infinity as needed.
+If nums[mid] and target are "on the same side" of nums[0],
+we just take nums[mid]. Otherwise we use -infinity or +infinity as needed.
 
 */
     public int search(int[] nums, int target) {
