@@ -71,6 +71,7 @@ public class Bipartitegraph {
         return true;
     }
 
+    // TC O(V+E) SC O(N)
     public boolean isBipartiteBFS(int[][] graph) {
         int len = graph.length;
         int[] colors = new int[len];
