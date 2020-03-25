@@ -30,7 +30,9 @@ public class Strobogrammatic {
 
         for (int i = 0; i < list.size(); i++) {
             String s = list.get(i);
-
+//Because number like "0690" is not valid,
+// and using m to record the origin n value so that
+// we know when the recursion return to the first layer, and do not append 0 to it.
             if (n != m) res.add("0" + s + "0");
 
             res.add("1" + s + "1");
