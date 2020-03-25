@@ -16,11 +16,11 @@ import java.util.List;
  */
 public class Strobogrammatic {
 
-    public List<String> findStrobogrammatic(int n) {
+    public static List<String> findStrobogrammatic(int n) {
         return helper(n, n);
     }
 
-    List<String> helper(int n, int m) {
+    static List<String> helper(int n, int m) {
         if (n == 0) return new ArrayList<String>(Arrays.asList(""));
         if (n == 1) return new ArrayList<String>(Arrays.asList("0", "1", "8"));
 
@@ -40,5 +40,9 @@ public class Strobogrammatic {
         }
 
         return res;
+    }
+
+    public static void main(String[] args) {
+        System.out.println(findStrobogrammatic(3));
     }
 }
