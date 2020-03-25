@@ -28,9 +28,11 @@ import java.util.Deque;
  * Note:
  * There will be at least one building. If it is not possible to build such house according to the above rules, return -1.
  */
+// TC O(m2n2)
 public class ShortestDistanceFromAllBuilding {
     static final int[] delta = new int[]{0, 1, 0, -1, 0};
     int min = Integer.MAX_VALUE;
+
 
     public int shortestDistance(int[][] grid) {
         int[][] dist = new int[grid.length][grid[0].length];
@@ -49,7 +51,14 @@ public class ShortestDistanceFromAllBuilding {
      * don't use a fresh "visited" for each BFS. Instead, I walk only onto the cells that were reachable from all previous buildings.
      * From the first building I only walk onto cells where grid is 0, and make them -1.
      * From the second building I only walk onto cells where grid is -1, and I make them -2. And so on.
+     * /**
+     * Traverse the matrix. For each building, use BFS to compute the shortest distance from each '0' to
+     this building. After we do this for all the buildings, we can get the sum of shortest distance
+     from every '0' to all reachable buildings. This value is stored
+     in 'distance[][]'
      */
+
+
     private void bfsVisit(int[][] grid, int[][] dist, int row, int col, int start) {
         Deque<int[]> que = new ArrayDeque<int[]>();
         que.offer(new int[]{row, col});
