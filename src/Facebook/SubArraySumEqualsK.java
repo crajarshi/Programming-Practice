@@ -85,7 +85,12 @@ public class SubArraySumEqualsK {
         HashMap<Integer, Integer> map = new HashMap<>();
         int sum = 0;
         int result = 0;
-        map.put(0, 1);
+        map.put(0, 1);//I see ...After spending some time on the analysis,
+        // I found the reason behind having initialize preSum.put(0,1)....
+        // it is for those (sum - k) == 0 calculations which are valid subarrays
+        // but need to get counted. e.g. if k = 7 and sum = 7
+        // (at second element for array is : 3, 4, 3, 8) at some iteration.....
+        // then sum - k = 0....this 0 will get counted in statement result += preSum.get(sum - k);
         for (int cur : nums) {
             sum += cur;
             if (map.containsKey(sum - k))  // there exist a key, that [hashmap-key  =  sum - k]
