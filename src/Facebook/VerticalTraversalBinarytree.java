@@ -50,7 +50,7 @@ public class VerticalTraversalBinarytree {
      Get col boundary min and max on the fly
      Retrieve result from cols
      **/
-    public List<List<Integer>> verticalOrder(TreeNode root) {
+    public static List<List<Integer>> verticalOrder(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
         if (root == null) {
             return res;
@@ -93,6 +93,16 @@ public class VerticalTraversalBinarytree {
         }
 
         return res;
+    }
+
+    public static void main(String[] args) {
+        TreeNode node = new TreeNode(3);
+        node.left = new TreeNode(9);
+        node.right = new TreeNode(20);
+        node.right.left = new TreeNode(15);
+        node.right.right = new TreeNode(7);
+
+        System.out.println(verticalOrder(node));
     }
 }
 
