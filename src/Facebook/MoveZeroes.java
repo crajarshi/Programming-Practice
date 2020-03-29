@@ -27,7 +27,6 @@ public class MoveZeroes {
         }
     }
 
-
     public static void main(String[] args) {
         int[] arr = {3, 2, 5, 0, 9, 7, 0, 8};
         int[] arr1 = {3, 2, 0, 0, 9, 7, 0, 8};
@@ -36,5 +35,18 @@ public class MoveZeroes {
         for (int num : arr12)
             System.out.println(num);
 
+    }
+
+    public void moveZeroes2(int[] nums) {
+        if (nums == null || nums.length == 0) return;
+
+        int insertPos = 0;
+        for (int num : nums) {
+            if (num != 0) nums[insertPos++] = num;
+        }
+
+        while (insertPos < nums.length) {
+            nums[insertPos++] = 0;
+        }
     }
 }
