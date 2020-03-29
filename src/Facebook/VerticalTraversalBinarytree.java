@@ -1,8 +1,6 @@
 package Facebook;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 /**
  * Given a binary tree, return the vertical order traversal of its nodes values.
@@ -44,75 +42,57 @@ import java.util.List;
  */
 public class VerticalTraversalBinarytree {
     /**
-     * Intuition
-     * <p>
-     * It's evident that there are two steps in a straightforward solution: first, find the location of every node, then report their locations.
-     * <p>
-     * Algorithm
-     * <p>
-     * To find the location of every node, we can use a depth-first search.
-     * During the search, we will maintain the location (x, y) of the node.
-     * As we move from parent to child, the location changes to (x-1, y+1) or (x+1, y+1)
-     * depending on if it is a left child or right child. [We use y+1 to make our sorting by decreasing y easier.]
-     * <p>
-     * To report the locations, we sort them by x coordinate, then y coordinate, so that they are in the correct order to be added to our answer.
-     * <p>
-     * Please see the inline comments for more details.
-     */
+     The following solution takes 5ms.
 
-    List<Location> locations;
+     BFS, put node, col into queue at the same time
+     Every left child access col - 1 while right child col + 1
+     This maps node into different col buckets
+     Get col boundary min and max on the fly
+     Retrieve result from cols
+     **/
+    public List<List<Integer>> verticalOrder(TreeNode root) {
+        List<List<Integer>> res = new ArrayList<>();
+        if (root == null) {
+            return res;
+        }
 
-    public List<List<Integer>> verticalTraversal(TreeNode root) {
-        // Each location is a node's x position, y position, and value
-        locations = new ArrayList();
-        dfs(root, 0, 0);
-        Collections.sort(locations);
+        Map<Integer, ArrayList<Integer>> map = new HashMap<>();
+        Queue<TreeNode> q = new LinkedList<>();
+        Queue<Integer> cols = new LinkedList<>();
 
-        List<List<Integer>> ans = new ArrayList();
-        ans.add(new ArrayList<Integer>());
+        q.add(root);
+        cols.add(0);
 
-        int prev = locations.get(0).x;
+        int min = 0;
+        int max = 0;
 
-        for (Location loc : locations) {
-            // If the x value changed, it's part of a new report.
-            if (loc.x != prev) {
-                prev = loc.x;
-                ans.add(new ArrayList<Integer>());
+        while (!q.isEmpty()) {
+            TreeNode node = q.poll();
+            int col = cols.poll();
+
+            if (!map.containsKey(col)) {
+                map.put(col, new ArrayList<Integer>());
+            }
+            map.get(col).add(node.val);
+
+            if (node.left != null) {
+                q.add(node.left);
+                cols.add(col - 1);
+                min = Math.min(min, col - 1);
             }
 
-            // We always add the node's value to the latest report.
-            ans.get(ans.size() - 1).add(loc.val);
+            if (node.right != null) {
+                q.add(node.right);
+                cols.add(col + 1);
+                max = Math.max(max, col + 1);
+            }
         }
 
-        return ans;
-    }
-
-    public void dfs(TreeNode node, int x, int y) {
-        if (node != null) {
-            locations.add(new Location(x, y, node.val));
-            dfs(node.left, x - 1, y + 1);
-            dfs(node.right, x + 1, y + 1);
+        for (int i = min; i <= max; i++) {
+            res.add(map.get(i));
         }
-    }
-}
 
-class Location implements Comparable<Location> {
-    int x, y, val;
-
-    Location(int x, int y, int val) {
-        this.x = x;
-        this.y = y;
-        this.val = val;
-    }
-
-    @Override
-    public int compareTo(Location that) {
-        if (this.x != that.x)
-            return Integer.compare(this.x, that.x);
-        else if (this.y != that.y)
-            return Integer.compare(this.y, that.y);
-        else
-            return Integer.compare(this.val, that.val);
+        return res;
     }
 }
 
