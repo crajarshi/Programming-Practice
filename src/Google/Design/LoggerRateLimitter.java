@@ -1,4 +1,4 @@
-package Google;
+package Google.Design;
 
 import java.util.HashMap;
 import java.util.Map;
