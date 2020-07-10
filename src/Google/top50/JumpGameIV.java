@@ -72,7 +72,8 @@ public class JumpGameIV {
                         q.offer(j);
                     }
                 }
-                next.clear(); // avoid later lookup indicesOfValue arr[i]
+                next.clear(); // avoid later lookup indicesOfValue arr[i]. If you do not clear, every time you see value in which you already perform the arr[i] == arr[j] movement, you will loop through the hashmap again and would result in possibly looping through the same list n time. (Worse case O(n^2)).
+                // After you clear the list, second time you visit the same value you will only need to consider the option +1 and -1.
             }
             step++;
         }
