@@ -44,8 +44,9 @@ public class JumpGameIV {
 
     public static void main(String[] args) {
         int arr[] = {100, -23, -23, 404, 100, 23, 23, 23, 3, 404};
+        int arr1[] = {7, 6, 9, 6, 9, 6, 9, 7};
         JumpGameIV jumpGameIV = new JumpGameIV();
-        System.out.println(jumpGameIV.minJumps(arr));
+        System.out.println(jumpGameIV.minJumps(arr1));
 
     }
 
