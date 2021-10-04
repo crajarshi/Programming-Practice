@@ -22,25 +22,22 @@ import java.util.Map;
  * You may assume that word1 does not equal to word2, and word1 and word2 are both in the list.
  */
 public class ShortestWordDistance2 {
-    private Map<String, List<Integer>> map;
+    private Map<String, List<Integer>> indexes;
 
     public ShortestWordDistance2(String[] words) {
-        map = new HashMap<String, List<Integer>>();
+        indexes = new HashMap<String, List<Integer>>();
         for (int i = 0; i < words.length; i++) {
             String w = words[i];
-            if (map.containsKey(w)) {
-                map.get(w).add(i);
-            } else {
-                List<Integer> list = new ArrayList<Integer>();
-                list.add(i);
-                map.put(w, list);
+            if (!indexes.containsKey(w)) {
+                indexes.put(w, new ArrayList<Integer>());
             }
+            indexes.get(w).add(i);
         }
     }
 
     public int shortest(String word1, String word2) {
-        List<Integer> list1 = map.get(word1);
-        List<Integer> list2 = map.get(word2);
+        List<Integer> list1 = indexes.get(word1);
+        List<Integer> list2 = indexes.get(word2);
         int ret = Integer.MAX_VALUE;
         for (int i = 0, j = 0; i < list1.size() && j < list2.size(); ) {
             int index1 = list1.get(i), index2 = list2.get(j);
@@ -53,6 +50,14 @@ public class ShortestWordDistance2 {
             }
         }
         return ret;
+    }
+
+    public static void main(String[] args) {
+        String[] words = {"practice", "makes", "perfect", "coding", "makes"};
+        ShortestWordDistance2 newShort = new ShortestWordDistance2(words);
+        System.out.println(newShort.shortest("coding","practice"));
+        System.out.println(newShort.shortest("coding","perfect"));
+
     }
 
 }
