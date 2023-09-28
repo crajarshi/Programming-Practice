@@ -1,5 +1,6 @@
 package Facebook;
 
+import java.util.PriorityQueue;
 import java.util.Random;
 
 /**
@@ -48,6 +49,36 @@ public class KthLargestElement {
         arr[j] = arr[i];
         arr[i] = temp;
 
+    }
+
+    /**
+     * Time complexity: O(n⋅log⁡k)O(n \cdot \log k)O(n⋅logk)
+     *
+     * Operations on a heap cost logarithmic time relative to its size.
+     * Because our heap is limited to a size of k, operations cost at most O(log⁡k)O(\log k)O(logk). We iterate over nums, performing one or two heap operations at each iteration.
+     *
+     * We iterate nnn times, performing up to log⁡k\log klogk work at each iteration,
+     * giving us a time complexity of O(n⋅log⁡k)O(n \cdot \log k)O(n⋅logk).
+     *
+     * Because k≤nk \leq nk≤n, this is an improvement on the previous approach.
+     *
+     * Space complexity: O(k)O(k)O(k)
+     *
+     * The heap uses O(k)O(k)O(k) space.
+     * @param nums
+     * @param k
+     * @return
+     */
+    public int findKthLargestMinHeap(int[] nums, int k) {
+        PriorityQueue<Integer> heap = new PriorityQueue<>();
+        for (int num: nums) {
+            heap.add(num);
+            if (heap.size() > k) {
+                heap.remove();
+            }
+        }
+
+        return heap.peek();
     }
 
     public static void main(String[] args) {
