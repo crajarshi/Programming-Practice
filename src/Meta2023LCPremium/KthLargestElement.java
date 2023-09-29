@@ -71,6 +71,7 @@ public class KthLargestElement {
      */
     public int findKthLargestMinHeap(int[] nums, int k) {
         PriorityQueue<Integer> heap = new PriorityQueue<>();
+        //PriorityQueue<Integer> pq = new PriorityQueue<>((a, b) -> b - a); to find Kth smallest
         for (int num: nums) {
             heap.add(num);
             if (heap.size() > k) {
