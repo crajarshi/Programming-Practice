@@ -1,4 +1,4 @@
-package Meta2023LCPremium;
+package Meta2023LCPremium.ArraysAndStrings;
 
 import java.util.HashMap;
 import java.util.LinkedList;

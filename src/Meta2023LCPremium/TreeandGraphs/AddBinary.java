@@ -1,4 +1,4 @@
-package Meta2023LCPremium;
+package Meta2023LCPremium.TreeandGraphs;
 
 /**
  * Given two binary strings, return their sum (also a binary string).

@@ -1,4 +1,4 @@
-package Meta2023LCPremium;
+package Meta2023LCPremium.ArraysAndStrings;
 
 /**
  * Given a string s, return true if the s can be palindrome after deleting at most one character from it.

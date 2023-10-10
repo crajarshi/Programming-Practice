@@ -1,4 +1,4 @@
-package Meta2023LCPremium;
+package Meta2023LCPremium.TreeandGraphs;
 
 import java.util.*;
 

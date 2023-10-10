@@ -1,4 +1,4 @@
-package Meta2023LCPremium;
+package Meta2023LCPremium.ArraysAndStrings;
 
 /**
  * A string can be abbreviated by replacing any number of non-adjacent,

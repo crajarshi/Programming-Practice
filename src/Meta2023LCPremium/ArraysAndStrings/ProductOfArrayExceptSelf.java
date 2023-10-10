@@ -1,4 +1,4 @@
-package Meta2023LCPremium;
+package Meta2023LCPremium.ArraysAndStrings;
 
 /**
  * Given an array nums of n integers where n > 1,
