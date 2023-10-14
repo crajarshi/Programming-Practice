@@ -100,6 +100,11 @@ public class RemoveInvalidParentheses {
      * <p>
      * T(n) = n x C(n, n) + (n-1) x C(n, n-1) + ... + 1 x C(n, 1) = n x 2^(n-1).
      *
+     * Regarding the time complexity, I think one way we can think about the search space is as a power subset of the original string.
+     * So it includes all possible substrings from 0 character to N(number of chars in the input string) characters.
+     * So the possibilities are 2^n. (we either pick a character or don't pick it)
+     * For each subset we check if it is a valid string so it becomes n*(2^n)
+     *
      * @param s
      * @return
      */
