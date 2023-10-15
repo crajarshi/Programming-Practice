@@ -1,4 +1,4 @@
-package Meta2023LCPremium;
+package Meta2023LCPremium.SearchAndSort;
 
 import java.util.Arrays;
 import java.util.HashSet;

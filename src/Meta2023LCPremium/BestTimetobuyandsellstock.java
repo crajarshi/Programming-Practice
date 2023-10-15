@@ -27,6 +27,24 @@ package Meta2023LCPremium;
  * Explanation: In this case, no transaction is done, i.e. max profit = 0.
  */
 public class BestTimetobuyandsellstock {
+    public int maxProfit(int[] prices) {
+        int lsf = Integer.MAX_VALUE;//least so far
+        int op = 0;// overall profit
+        int pist = 0;// profit if sold today
+
+        for (int i = 0; i < prices.length; i++) {
+            if (prices[i] < lsf) {// if we found new buy value which is more smaller then previous one
+                lsf = prices[i]; // update our least so far
+            }
+            pist = prices[i] - lsf;// calculating profit if sold today by, Buy - sell
+            if (op < pist) {// if pist is more then our previous overall profit
+                op = pist;// update overall profit
+            }
+
+        }
+        return op;// return op
+    }
+
     /**
      * The thinking is simple and is inspired by the best solution from Single Number II (I read through the discussion after I use DP).
      * Assume we only have 0 money at first;
@@ -34,6 +52,7 @@ public class BestTimetobuyandsellstock {
      * The maximum of if we've just buy 1st stock, if we've just sold 1nd stock, if we've just buy 2nd stock, if we've just sold 2nd stock.
      * Very simple code too and work well.
      */
+
     public static int maxProfit3(int[] prices) {
         if (prices == null || prices.length <= 1) return 0;
         int oneBuy = Integer.MIN_VALUE;
