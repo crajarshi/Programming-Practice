@@ -49,8 +49,10 @@ public class RemoveInvalidParentheses {
     }
 
     /**
-     * The idea is straightforward, with the input string s, we generate all possible states by removing one ( or ),
-     * check if they are valid, if found valid ones on the current level, put them to the final result list and we are done,
+     * The idea is straightforward, with the input string s,
+     * we generate all possible states by removing one ( or ),
+     * check if they are valid, if found valid ones on the current level,
+     * put them to the final result list and we are done,
      * otherwise, add them to a queue and carry on to the next level.
      * <p>
      * The good thing of using BFS is that we can guarantee the number of parentheses
