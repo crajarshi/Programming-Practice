@@ -61,30 +61,56 @@ public class WordAbbreviation {
      * Time complexity: O(abbr.length()) ~ O(n)
      * Space complexity: O(1)
      */
-    public boolean validWordAbbreviation(String word, String abbr) {
-        if(abbr.length() == 0 || word.length() < abbr.length()) return false;
-        int len = 0, lastNum = 0;
-
-        for(int i=0; i<abbr.length(); i++){
-            char c = abbr.charAt(i);
-            if(lastNum == 0 && c == '0')
-                return false;
-
-            if(Character.isDigit(c)){
-                lastNum = lastNum*10 + c-'0';
-            }
-            else {
-                len = len + lastNum + 1;
-                lastNum = 0;
-
-                if(word.length() >= len){
-                    if(word.charAt(len-1) != c)
-                        return false;
-                }
-            }
+    public static boolean validWordAbbreviation(String word, String abbr) {
+        if (word == null || abbr == null) {
+            throw new IllegalArgumentException("Input is null");
         }
 
-        return len+lastNum == word.length();
+        int wLen = word.length();
+        int aLen = abbr.length();
 
+        // length of abbreviation cannot be greater than word's length
+        if (aLen > wLen) {
+            return false;
+        }
+
+        if (wLen == 0) {
+            return true;
+        }
+
+        int i = 0;
+        int j = 0;
+
+        while (i < wLen && j < aLen) {
+            // It current characters in both word and abbr is same continue checking.
+            if (word.charAt(i) == abbr.charAt(j)) {
+                i++;
+                j++;
+                continue;
+            }
+
+            // Now current characters in word and abbr do not match. Thus current character
+            // in abbr should be a valid starting digit 0 < x <= 9.
+            if (abbr.charAt(j) == '0' || !Character.isDigit(abbr.charAt(j))) {
+                return false;
+            }
+
+            // The num value
+            int num = 0;
+            while (j < aLen && Character.isDigit(abbr.charAt(j))) {
+                num = 10 * num + (abbr.charAt(j) - '0');
+                j++;
+            }
+
+            // Increment word pinter by num.
+            i += num;
+        }
+
+        // If both i and j pointers are at end, then we have a valid word abbreviation
+        return i == wLen && j == aLen;
+    }
+
+    public static void main(String[] args) {
+        validWordAbbreviation("internationalization","i12iz4n");
     }
 }

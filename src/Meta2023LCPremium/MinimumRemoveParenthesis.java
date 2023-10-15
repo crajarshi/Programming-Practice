@@ -64,22 +64,24 @@ public class MinimumRemoveParenthesis {
      *
      */
     public String minRemoveToMakeValid2(String s) {
-        int count = 0;
+        char[] arr = s.toCharArray();
+        int open = 0;
 
-        char ch[] = s.toCharArray();
-
-        for(int i = 0; i < ch.length; i++){
-            if(ch[i] == '(') count++;
-            else if(ch[i] == ')'){
-                if(count == 0) ch[i] = '#';
-                else count--;
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] == '(')
+                open++;
+            else if (arr[i] == ')') {
+                if (open == 0)
+                    arr[i] = '*';
+                else
+                    open--;
             }
         }
 
-        for(int i = ch.length - 1; i >= 0; i--){
-            if(ch[i] == '(' && count > 0){
-                ch[i] = '#';
-                count--;
+        for (int i = arr.length - 1; i >= 0; i--) {
+            if (open > 0 && arr[i] == '(') {
+                arr[i] = '*';
+                open--;
             }
 
         }

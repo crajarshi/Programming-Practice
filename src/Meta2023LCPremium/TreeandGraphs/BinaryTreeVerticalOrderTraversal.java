@@ -3,7 +3,8 @@ package Meta2023LCPremium.TreeandGraphs;
 import java.util.*;
 
 /**
- * Given the root of a binary tree, return the vertical order traversal of its nodes' values. (i.e., from top to bottom, column by column).
+ * Given the root of a binary tree,
+ * return the vertical order traversal of its nodes' values. (i.e., from top to bottom, column by column).
  *
  * If two nodes are in the same row and column, the order should be from left to right.
  *
@@ -97,7 +98,8 @@ public class BinaryTreeVerticalOrderTraversal {
      * where the nodes would be visited level by level.
      *
      * With the BFS traversal, we naturally can guarantee the vertical order of the visits,
-     * i.e. the nodes at higher levels (large row values) would get visited later than the ones at lower levels.
+     * i.e. the nodes at higher levels (large row values)
+     * would get visited later than the ones at lower levels.
      *
      * However, we are still missing the horizontal order ( the column order).
      * To ensure this order, we need to do some additional processing during the BFS traversal.
